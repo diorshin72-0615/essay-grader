@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI 作文批改 — 學測・會考專用</title>
+<title>批批 PiPi AI — 作文批改平台</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -15,114 +15,124 @@
   --green:#16A34A;--green-bg:#F0FDF4;--green-border:#BBF7D0;
   --amber:#D97706;--amber-bg:#FFFBEB;--amber-border:#FDE68A;
   --red:#DC2626;--red-bg:#FEF2F2;--red-border:#FECACA;
-  --radius:10px;--radius-lg:16px;
+  --pink:#DB2777;--pink-bg:#FDF2F8;--pink-border:#FBCFE8;
+  --radius:10px;--radius-lg:16px;--radius-xl:24px;
   --font-body:'DM Sans',sans-serif;
   --font-serif:'Noto Serif TC',serif;
   --font-mono:monospace;
 }
 body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6}
-.site-header{padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:var(--surface)}
-.logo{font-family:var(--font-serif);font-size:18px;font-weight:600}
-.logo span{color:var(--text-3);font-weight:400;font-size:14px;margin-left:6px}
-.header-badge{font-size:11px;background:var(--green-bg);color:var(--green);border:1px solid var(--green-border);padding:3px 10px;border-radius:20px;font-weight:600}
-main{max-width:720px;margin:0 auto;padding:2rem 1.5rem}
 .page{display:none}.page.active{display:block}
 
-/* Home */
-.home-eyebrow{font-size:12px;font-weight:600;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
-.home-title{font-family:var(--font-serif);font-size:30px;font-weight:600;line-height:1.3;margin-bottom:8px}
-.home-sub{font-size:14px;color:var(--text-2);margin-bottom:2rem}
-.type-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-.type-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;cursor:pointer;transition:border-color .15s,box-shadow .15s;text-align:left;width:100%}
-.type-card:hover{border-color:var(--border-mid);box-shadow:0 2px 12px rgba(0,0,0,.06)}
+/* Header */
+.site-header{padding:.875rem 1.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:var(--surface);position:sticky;top:0;z-index:10}
+.logo{font-family:var(--font-serif);font-size:18px;font-weight:700;letter-spacing:-.01em}
+.logo-pip{color:var(--pink)}
+.header-right{display:flex;align-items:center;gap:12px}
+.user-badge{font-size:12px;color:var(--text-2);background:var(--bg);border:1px solid var(--border);padding:4px 10px;border-radius:20px;display:none}
+.logout-btn{font-size:12px;color:var(--text-3);background:none;border:none;cursor:pointer;padding:0}
+.logout-btn:hover{color:var(--text)}
+
+main{max-width:680px;margin:0 auto;padding:2rem 1.5rem}
+
+/* Welcome page */
+.welcome-wrap{min-height:calc(100vh - 57px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 1.5rem;max-width:500px;margin:0 auto}
+.welcome-emoji{font-size:56px;margin-bottom:1rem;display:block}
+.welcome-title{font-family:var(--font-serif);font-size:32px;font-weight:700;margin-bottom:8px;line-height:1.2}
+.welcome-title .pip{color:var(--pink)}
+.welcome-sub{font-size:15px;color:var(--text-2);margin-bottom:2.5rem;line-height:1.6}
+.identity-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%}
+.identity-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-xl);padding:1.75rem 1.25rem;cursor:pointer;transition:all .15s;text-align:center}
+.identity-card:hover{border-color:var(--pink);box-shadow:0 4px 20px rgba(219,39,119,.1)}
+.identity-emoji{font-size:40px;display:block;margin-bottom:10px}
+.identity-label{font-size:16px;font-weight:600;margin-bottom:4px}
+.identity-desc{font-size:12px;color:var(--text-3)}
+
+/* Register page */
+.register-wrap{max-width:480px;margin:0 auto;padding:2rem 1.5rem}
+.form-title{font-family:var(--font-serif);font-size:24px;font-weight:700;margin-bottom:4px}
+.form-sub{font-size:14px;color:var(--text-2);margin-bottom:2rem}
+.field{margin-bottom:14px}
+.field-label{font-size:13px;font-weight:600;color:var(--text);display:block;margin-bottom:6px}
+.field-label span{color:var(--text-3);font-weight:400}
+input[type=text],input[type=email],input[type=password],select,textarea{width:100%;border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;font-family:var(--font-body);font-size:14px;color:var(--text);background:var(--surface);outline:none;transition:border-color .15s;display:block;-webkit-appearance:none}
+input:focus,select:focus,textarea:focus{border-color:var(--border-mid)}
+select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239C9A96' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+.api-hint{font-size:12px;color:var(--text-3);margin-top:5px}
+.api-hint a{color:var(--blue);text-decoration:none}
+.register-btn{width:100%;margin-top:8px;padding:12px;font-size:15px;font-weight:600;border-radius:var(--radius);border:none;cursor:pointer;background:var(--pink);color:#fff;transition:opacity .15s;letter-spacing:.01em}
+.register-btn:hover{opacity:.88}
+.identity-pill{display:inline-flex;align-items:center;gap:6px;background:var(--pink-bg);color:var(--pink);border:1px solid var(--pink-border);border-radius:20px;font-size:12px;font-weight:600;padding:4px 12px;margin-bottom:1.5rem}
+
+/* Home page */
+.home-greeting{font-family:var(--font-serif);font-size:24px;font-weight:700;margin-bottom:4px}
+.home-sub{font-size:14px;color:var(--text-2);margin-bottom:1.75rem}
+.section-label{font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.type-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-bottom:1.5rem}
+.type-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;cursor:pointer;transition:all .15s;text-align:left;width:100%}
+.type-card:hover{border-color:var(--border-mid);box-shadow:0 2px 12px rgba(0,0,0,.06);transform:translateY(-1px)}
 .type-tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;margin-bottom:10px;letter-spacing:.04em;text-transform:uppercase}
-.tag-blue{background:var(--blue-bg);color:var(--blue)}.tag-green{background:var(--green-bg);color:var(--green)}
-.tag-amber{background:var(--amber-bg);color:var(--amber)}.tag-red{background:var(--red-bg);color:var(--red)}
-.type-name{font-size:16px;font-weight:600;margin-bottom:4px;color:var(--text)}
+.tag-blue{background:var(--blue-bg);color:var(--blue)}
+.tag-green{background:var(--green-bg);color:var(--green)}
+.tag-amber{background:var(--amber-bg);color:var(--amber)}
+.tag-red{background:var(--red-bg);color:var(--red)}
+.tag-pink{background:var(--pink-bg);color:var(--pink)}
+.type-name{font-size:15px;font-weight:600;margin-bottom:4px;color:var(--text)}
 .type-desc{font-size:12px;color:var(--text-2);line-height:1.5}
 .type-score{font-size:11px;color:var(--text-3);margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+
+/* History section */
+.history-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem}
+.history-empty{font-size:13px;color:var(--text-3);text-align:center;padding:1rem 0}
+.history-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);cursor:pointer}
+.history-item:last-child{border-bottom:none}
+.history-item:hover .history-title{color:var(--blue)}
+.history-title{font-size:13px;font-weight:500;color:var(--text)}
+.history-meta{font-size:12px;color:var(--text-3)}
+.history-score{font-size:13px;font-weight:600;color:var(--pink)}
 
 /* Grade page */
 .back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text-2);background:none;border:none;cursor:pointer;padding:0;margin-bottom:1.5rem}
 .back-btn:hover{color:var(--text)}
-.grade-title{font-family:var(--font-serif);font-size:22px;font-weight:600;margin-bottom:4px}
+.grade-title{font-family:var(--font-serif);font-size:22px;font-weight:700;margin-bottom:4px}
 .grade-desc{font-size:13px;color:var(--text-2);margin-bottom:1.25rem}
-
-/* API section */
-.api-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem;margin-bottom:1.25rem}
-.api-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px}
-.api-row{display:flex;gap:8px}
-.api-input{flex:1;border:1px solid var(--border);border-radius:var(--radius);padding:8px 12px;font-family:var(--font-mono);font-size:13px;color:var(--text);background:var(--bg);outline:none;transition:border-color .15s}
-.api-input:focus{border-color:var(--border-mid)}
-.api-save-btn{padding:8px 14px;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface);font-size:13px;font-weight:500;cursor:pointer;color:var(--text-2);white-space:nowrap}
-.api-save-btn:hover{color:var(--text);border-color:var(--border-mid)}
-.api-saved{font-size:12px;color:var(--green);margin-top:6px;display:none}
-.api-link{font-size:12px;color:var(--blue);margin-top:6px;display:block;text-decoration:none}
-.api-link:hover{text-decoration:underline}
-
-/* Note box */
-.note-box{background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:var(--radius);padding:10px 14px;font-size:13px;color:var(--amber);margin-bottom:1.25rem}
-
-/* Sub toggle */
 .sub-toggle{display:flex;gap:8px;margin-bottom:12px}
 .sub-btn{padding:5px 14px;border-radius:20px;font-size:13px;border:1px solid var(--border);background:var(--surface);color:var(--text-2);cursor:pointer;font-weight:500}
 .sub-btn.active{background:var(--text);color:#fff;border-color:var(--text)}
-
-/* Form */
-.field{margin-bottom:12px}
-.field-label{font-size:13px;color:var(--text-2);display:block;margin-bottom:6px;font-weight:500}
-input[type=text],textarea{width:100%;border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;font-family:var(--font-body);font-size:14px;color:var(--text);background:var(--surface);outline:none;transition:border-color .15s;display:block}
-input[type=text]:focus,textarea:focus{border-color:var(--border-mid)}
-textarea{height:150px;resize:vertical;line-height:1.7}
-
-/* Tabs */
-.tab-row{display:flex;gap:6px;margin-bottom:1rem;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:4px}
-.tab-btn{flex:1;padding:7px;border-radius:7px;font-size:13px;font-weight:500;border:none;cursor:pointer;background:transparent;color:var(--text-2);transition:all .15s}
-.tab-btn.active{background:var(--surface);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.08)}
-
-/* Drop zone */
-.drop-zone{border:1.5px dashed var(--border-mid);border-radius:var(--radius-lg);padding:2.5rem 1.5rem;text-align:center;cursor:pointer;background:var(--bg);transition:all .15s}
-.drop-zone:hover,.drop-zone.drag{border-color:var(--blue);background:var(--blue-bg)}
-.drop-icon{font-size:36px;margin-bottom:10px;display:block}
-.drop-title{font-size:14px;font-weight:500;margin-bottom:4px;color:var(--text)}
-.drop-sub{font-size:12px;color:var(--text-3)}
-.preview-img{max-width:100%;max-height:220px;border-radius:var(--radius);border:1px solid var(--border);display:block;margin-top:12px}
-.remove-btn{margin-top:8px;font-size:12px;color:var(--text-3);background:none;border:1px solid var(--border);border-radius:20px;padding:3px 10px;cursor:pointer}
-.img-note{font-size:12px;color:var(--amber);margin-top:8px;background:var(--amber-bg);padding:8px 12px;border-radius:var(--radius);border:1px solid var(--amber-border)}
-
-/* Submit */
-.submit-btn{width:100%;margin-top:14px;padding:12px;font-size:15px;font-weight:600;border-radius:var(--radius);border:none;cursor:pointer;background:var(--text);color:#fff;transition:opacity .15s}
-.submit-btn:hover{opacity:.85}
+.field-label-sm{font-size:13px;color:var(--text-2);display:block;margin-bottom:6px;font-weight:500}
+.grade-field{margin-bottom:12px}
+textarea.essay-box{width:100%;border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;font-family:var(--font-body);font-size:14px;color:var(--text);background:var(--surface);outline:none;transition:border-color .15s;display:block;height:160px;resize:vertical;line-height:1.7}
+textarea.essay-box:focus{border-color:var(--border-mid)}
+.wc-row{display:flex;justify-content:space-between;font-size:12px;color:var(--text-3);margin-top:4px}
+.wc-warn{color:var(--amber)}
+.submit-btn{width:100%;margin-top:14px;padding:12px;font-size:15px;font-weight:600;border-radius:var(--radius);border:none;cursor:pointer;background:var(--pink);color:#fff;transition:opacity .15s}
+.submit-btn:hover{opacity:.88}
 .submit-btn:disabled{opacity:.4;cursor:not-allowed}
-
-/* Loading */
 .loading{display:none;text-align:center;padding:2.5rem 0;color:var(--text-2);font-size:14px}
 .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--text-3);animation:pulse 1.2s ease-in-out infinite;margin:0 2px}
 .dot:nth-child(2){animation-delay:.2s}.dot:nth-child(3){animation-delay:.4s}
 @keyframes pulse{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
-
-/* Error */
 .err-box{display:none;color:var(--red);font-size:13px;margin-top:12px;background:var(--red-bg);padding:10px 14px;border-radius:var(--radius);border:1px solid var(--red-border)}
+.result-area{display:none;margin-top:1.5rem}
 
 /* Results */
-.result-area{display:none;margin-top:1.5rem}
 .score-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1rem}
 .score-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;text-align:center}
 .score-lbl{font-size:11px;color:var(--text-3);margin-bottom:4px;font-weight:500;text-transform:uppercase;letter-spacing:.06em}
-.score-num{font-size:30px;font-weight:600;line-height:1}
+.score-num{font-size:30px;font-weight:700;line-height:1;color:var(--pink)}
 .score-num sub{font-size:14px;color:var(--text-3);font-weight:400}
-.score-grade{font-size:26px;font-weight:700;color:var(--blue)}
+.score-grade{font-size:26px;font-weight:700;color:var(--pink)}
 .rcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.125rem 1.25rem;margin-bottom:12px}
 .rcard-title{font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
 .bar-wrap{margin-bottom:12px}
 .bar-top{display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px}
 .bar-track{height:5px;background:var(--bg);border-radius:3px;overflow:hidden}
-.bar-fill{height:100%;background:var(--blue);border-radius:3px}
+.bar-fill{height:100%;background:var(--pink);border-radius:3px}
 .bar-note{font-size:12px;color:var(--text-3);margin-top:3px}
 .overall-p{font-size:14px;color:var(--text-2);line-height:1.75}
 .sugg-item{display:flex;gap:10px;margin-bottom:10px;font-size:14px;color:var(--text-2);align-items:flex-start}
-.sugg-n{min-width:20px;height:20px;border-radius:50%;background:var(--bg);border:1px solid var(--border);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;color:var(--text);margin-top:1px;flex-shrink:0}
-.rewrite-box{font-size:14px;color:var(--text-2);line-height:1.8;background:var(--bg);padding:12px 14px;border-radius:var(--radius);border-left:3px solid var(--blue)}
+.sugg-n{min-width:20px;height:20px;border-radius:50%;background:var(--pink-bg);border:1px solid var(--pink-border);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;color:var(--pink);margin-top:1px;flex-shrink:0}
+.rewrite-box{font-size:14px;color:var(--text-2);line-height:1.8;background:var(--bg);padding:12px 14px;border-radius:var(--radius);border-left:3px solid var(--pink)}
 .sw-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .sw-lbl{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
 .sw-lbl.pos{color:var(--green)}.sw-lbl.neg{color:var(--red)}
@@ -135,247 +145,388 @@ textarea{height:150px;resize:vertical;line-height:1.7}
 .dim-item{margin-bottom:10px}
 .dim-name{font-size:12px;font-weight:600;color:var(--text);margin-bottom:2px}
 .dim-comment{font-size:13px;color:var(--text-2)}
+
+/* Weakness */
+.weakness-section{margin-top:1rem}
+.weakness-card{background:var(--pink-bg);border:1px solid var(--pink-border);border-radius:var(--radius-lg);padding:1rem 1.25rem;margin-bottom:12px}
+.weakness-title{font-size:13px;font-weight:600;color:var(--pink);margin-bottom:6px}
+.weakness-text{font-size:13px;color:var(--text-2);line-height:1.6}
 </style>
 </head>
 <body>
 
 <header class="site-header">
-  <div class="logo">AI 作文批改 <span>Beta</span></div>
-  <span class="header-badge">免費使用</span>
+  <div class="logo">批批 <span class="logo-pip">PiPi</span> AI</div>
+  <div class="header-right">
+    <span class="user-badge" id="user-badge"></span>
+    <button class="logout-btn" id="logout-btn" onclick="logout()" style="display:none">登出</button>
+  </div>
 </header>
 
-<main>
+<!-- 歡迎頁 -->
+<div id="page-welcome" class="page">
+  <div class="welcome-wrap">
+    <span class="welcome-emoji">✍️</span>
+    <div class="welcome-title">歡迎來到<br>批批 <span class="pip">PiPi</span> AI</div>
+    <p class="welcome-sub">AI 作文批改平台，專為台灣國高中生設計<br>請問你是哪個階段的學生？</p>
+    <div class="identity-grid">
+      <div class="identity-card" onclick="selectIdentity('junior')">
+        <span class="identity-emoji">📚</span>
+        <div class="identity-label">國中生</div>
+        <div class="identity-desc">會考國文作文</div>
+      </div>
+      <div class="identity-card" onclick="selectIdentity('senior')">
+        <span class="identity-emoji">🎓</span>
+        <div class="identity-label">高中生</div>
+        <div class="identity-desc">學測英文・國寫・中譯英</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 註冊頁 -->
+<div id="page-register" class="page">
+  <div class="register-wrap">
+    <div id="register-identity-pill" class="identity-pill"></div>
+    <div class="form-title">建立你的帳號</div>
+    <p class="form-sub">填完之後就可以開始批改囉！下次自動登入。</p>
+
+    <div class="field">
+      <label class="field-label">姓名</label>
+      <input type="text" id="reg-name" placeholder="你的名字">
+    </div>
+    <div class="field">
+      <label class="field-label">Gmail</label>
+      <input type="email" id="reg-email" placeholder="yourname@gmail.com">
+    </div>
+    <div class="field">
+      <label class="field-label">年級</label>
+      <select id="reg-grade">
+        <option value="">請選擇</option>
+      </select>
+    </div>
+    <div class="field">
+      <label class="field-label">學校 <span>（選填）</span></label>
+      <input type="text" id="reg-school" placeholder="就讀學校名稱">
+    </div>
+    <div class="field">
+      <label class="field-label">最想加強的科目</label>
+      <select id="reg-subject">
+        <option value="">請選擇</option>
+      </select>
+    </div>
+    <div class="field">
+      <label class="field-label">Groq API Key <span>（免費）</span></label>
+      <input type="password" id="reg-apikey" placeholder="gsk_...">
+      <div class="api-hint">免費申請：<a href="https://console.groq.com/keys" target="_blank">console.groq.com/keys</a>（不需信用卡）</div>
+    </div>
+
+    <button class="register-btn" onclick="doRegister()">開始使用 批批 PiPi AI 🎉</button>
+    <div class="err-box" id="reg-err" style="margin-top:12px"></div>
+  </div>
+</div>
 
 <!-- 首頁 -->
-<div id="page-home" class="page active">
-  <div class="home-eyebrow">學測・會考專用</div>
-  <div class="home-title">用 AI 批改你的作文</div>
-  <p class="home-sub">四種考試題型・完全免費・由 Groq 驅動</p>
-  <div class="type-grid">
-    <button class="type-card" onclick="goTo('gsat-eng')">
-      <span class="type-tag tag-blue">學測</span>
-      <div class="type-name">英文作文</div>
-      <div class="type-desc">內容・組織・文法句構<br>字彙拼字・體例</div>
-      <div class="type-score">滿分 20 分・五項評分</div>
-    </button>
-    <button class="type-card" onclick="goTo('gsat-chi')">
-      <span class="type-tag tag-green">學測</span>
-      <div class="type-name">國文國寫</div>
-      <div class="type-desc">知性題或情意題<br>六級分制評分</div>
-      <div class="type-score">滿分 25 分・A+/A/B+/B/C+/C</div>
-    </button>
-    <button class="type-card" onclick="goTo('gsat-trans')">
-      <span class="type-tag tag-amber">學測</span>
-      <div class="type-name">中譯英</div>
-      <div class="type-desc">逐句評分<br>每個錯誤扣 0.5 分</div>
-      <div class="type-score">每題 4 分・共 8 分</div>
-    </button>
-    <button class="type-card" onclick="goTo('bcap-chi')">
-      <span class="type-tag tag-red">會考</span>
-      <div class="type-name">國文作文</div>
-      <div class="type-desc">立意・組織・遣詞<br>格式標點</div>
-      <div class="type-score">滿分 6 級分</div>
-    </button>
-  </div>
+<div id="page-home" class="page">
+  <main>
+    <div class="home-greeting" id="home-greeting"></div>
+    <p class="home-sub" id="home-sub"></p>
+
+    <div class="section-label">選擇批改題型</div>
+    <div class="type-grid" id="type-grid"></div>
+
+    <div class="section-label">批改歷史紀錄</div>
+    <div class="history-section">
+      <div id="history-list"><div class="history-empty">還沒有批改紀錄，快去批改你的第一篇作文吧！</div></div>
+    </div>
+  </main>
 </div>
 
 <!-- 批改頁 -->
 <div id="page-grade" class="page">
-  <button class="back-btn" onclick="goTo('home')">
-    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 12L6 8l4-4"/></svg>
-    返回選擇
-  </button>
+  <main>
+    <button class="back-btn" onclick="goTo('home')">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 12L6 8l4-4"/></svg>
+      返回首頁
+    </button>
+    <div class="grade-title" id="grade-title"></div>
+    <div class="grade-desc" id="grade-desc"></div>
 
-  <div class="grade-title" id="grade-title"></div>
-  <div class="grade-desc" id="grade-desc"></div>
-
-  <!-- API Key -->
-  <div class="api-section">
-    <div class="api-title">🔑 Groq API Key（免費・台灣可用）</div>
-    <div class="api-row">
-      <input class="api-input" type="password" id="api-key-input" placeholder="gsk_...（填一次會記住）">
-      <button class="api-save-btn" onclick="saveKey()">儲存</button>
+    <div id="sub-toggle-wrap" style="display:none" class="grade-field">
+      <div class="sub-toggle">
+        <button class="sub-btn active" id="chi-btn-zx" onclick="setChiMode('zx')">知性題</button>
+        <button class="sub-btn" id="chi-btn-qy" onclick="setChiMode('qy')">情意題</button>
+      </div>
     </div>
-    <div class="api-saved" id="api-saved">✓ 已儲存</div>
-    <a class="api-link" href="https://console.groq.com/keys" target="_blank">→ 免費申請 Groq API Key（不需信用卡，台灣可用）</a>
-  </div>
 
-  <!-- 圖片說明 -->
-  <div class="note-box" id="img-limit-note" style="display:none">
-    ⚠️ Groq 免費版不支援圖片辨識，請使用「貼上文字」模式。若需圖片功能，未來可升級至 Claude 版本。
-  </div>
-
-  <!-- 國寫子模式 -->
-  <div id="sub-toggle-wrap" style="display:none" class="field">
-    <div class="sub-toggle">
-      <button class="sub-btn active" id="chi-btn-zx" onclick="setChiMode('zx')">知性題</button>
-      <button class="sub-btn" id="chi-btn-qy" onclick="setChiMode('qy')">情意題</button>
+    <div id="title-field" class="grade-field" style="display:none">
+      <label class="field-label-sm" id="title-label">作文題目（選填）</label>
+      <input type="text" id="title-input" placeholder="">
     </div>
-  </div>
 
-  <!-- 題目欄 -->
-  <div id="title-field" class="field" style="display:none">
-    <label class="field-label" id="title-label">作文題目（選填）</label>
-    <input type="text" id="title-input" placeholder="">
-  </div>
-
-  <!-- 輸入方式切換 -->
-  <div class="tab-row">
-    <button class="tab-btn active" id="tab-text" onclick="switchTab('text')">✏️ 貼上文字</button>
-    <button class="tab-btn" id="tab-img" onclick="switchTab('img')">📷 上傳圖片</button>
-  </div>
-
-  <!-- 文字 -->
-  <div id="input-text-area" class="field">
-    <label class="field-label">貼上內容</label>
-    <textarea id="main-textarea" placeholder="在這裡貼上作文..."></textarea>
-  </div>
-
-  <!-- 圖片（提示不支援） -->
-  <div id="input-img-area" style="display:none" class="field">
-    <div class="drop-zone" id="drop-zone"
-      onclick="document.getElementById('file-input').click()"
-      ondragover="event.preventDefault();this.classList.add('drag')"
-      ondragleave="this.classList.remove('drag')"
-      ondrop="handleDrop(event)">
-      <span class="drop-icon">🖼️</span>
-      <div class="drop-title">點擊或拖曳圖片上傳</div>
-      <div class="drop-sub">上傳後 AI 會先轉成文字再批改</div>
+    <div class="grade-field">
+      <label class="field-label-sm" id="textarea-label">貼上內容</label>
+      <textarea class="essay-box" id="main-textarea" placeholder="在這裡貼上作文..."></textarea>
+      <div class="wc-row">
+        <span id="wc-display">0 字</span>
+        <span id="wc-hint"></span>
+      </div>
     </div>
-    <input type="file" id="file-input" accept="image/*" style="display:none" onchange="handleFile(this.files[0])">
-    <div id="preview-wrap" style="display:none">
-      <img id="preview-img" class="preview-img" alt="作文圖片">
-      <div class="img-note">⚠️ Groq 不支援圖片直接辨識。請把圖片中的文字手動複製到「貼上文字」欄位，或改用文字模式。</div>
-      <button class="remove-btn" onclick="clearImg()">移除圖片</button>
+
+    <button class="submit-btn" id="grade-btn" onclick="doGrade()">✨ 開始批改</button>
+    <div class="loading" id="grade-loading">
+      <div style="margin-bottom:12px">批批老師批改中，請稍候</div>
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
     </div>
-  </div>
-
-  <button class="submit-btn" id="grade-btn" onclick="doGrade()">開始批改</button>
-
-  <div class="loading" id="grade-loading">
-    <div style="margin-bottom:12px">AI 老師批改中，請稍候</div>
-    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-  </div>
-  <div class="err-box" id="grade-err"></div>
-  <div class="result-area" id="grade-result"></div>
+    <div class="err-box" id="grade-err"></div>
+    <div class="result-area" id="grade-result"></div>
+  </main>
 </div>
 
-</main>
-
 <script>
-let currentType='', currentTab='text', imgB64=null, chiMode='zx';
-let savedKey = '';
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbygTP7OrHSg1iisnVeTnAimNvAt8EZ9R_IVYfam0LsnyCr5uatc_UPPgLHBGyBup7dk/exec';
 
-const cfg = {
-  'gsat-eng':{title:'英文作文',desc:'內容 5 + 組織 5 + 文法句構 4 + 字彙拼字 4 + 體例 2 = 20 分',showSub:false,showTitle:true,titleLabel:'作文題目或提示（選填）',titlePH:'e.g. Write about a challenge you overcame',textPH:'Paste your English essay here...'},
-  'gsat-chi':{title:'國文國寫',desc:'知性題或情意題，六級分制（A+ 到 C），滿分 25 分',showSub:true,showTitle:true,titleLabel:'題目或題幹（建議填寫）',titlePH:'例：說明對「標籤」現象的看法',textPH:'在這裡貼上國寫作文...'},
-  'gsat-trans':{title:'中譯英',desc:'每題 4 分，每個錯誤扣 0.5 分，共 8 分',showSub:false,showTitle:false,textPH:'格式：\n第一句中文\n第一句英文翻譯\n\n第二句中文\n第二句英文翻譯'},
-  'bcap-chi':{title:'國文作文（會考）',desc:'六級分制：立意取材・組織結構・遣詞造句・格式標點',showSub:false,showTitle:true,titleLabel:'作文題目（選填）',titlePH:'例：在那段與眾不同的日子裡',textPH:'在這裡貼上作文...'}
+let currentType = '', chiMode = 'zx';
+let user = null;
+
+// ── Init ──
+window.onload = function() {
+  const saved = localStorage.getItem('pipi_user');
+  if (saved) {
+    user = JSON.parse(saved);
+    showHome();
+  } else {
+    goTo('welcome');
+  }
 };
 
-const systemPrompts = {
-  'gsat-eng': `你是台灣學測英文作文閱卷委員，依照大考中心官方評分標準批改。請只輸出純JSON，不要任何markdown或說明：
-{"total":數字,"grade_label":"特優/優/可/差/劣","items":[{"name":"內容 Content","score":數字,"max":5,"comment":"繁體中文評語"},{"name":"組織 Organization","score":數字,"max":5,"comment":"繁體中文評語"},{"name":"文法與句構 Grammar","score":數字,"max":4,"comment":"繁體中文評語"},{"name":"字彙與拼字 Vocabulary","score":數字,"max":4,"comment":"繁體中文評語"},{"name":"體例 Mechanics","score":數字,"max":2,"comment":"繁體中文評語"}],"overall":"整體評語2-3句繁體中文","suggestions":["具體建議1","具體建議2","具體建議3"],"rewrite":"【改寫範例】選最需改善的一段提供英文改寫版本"}`,
-  'gsat-chi-zx': `你是台灣學測國語文寫作能力測驗（國寫）閱卷委員，批改知性題。評分六級制：A+（19-21分）A（15-18分）B+（12-14分）B（8-11分）C+（5-7分）C（1-4分），滿分25分。知性題重點：論點明確、詮釋深入、結構嚴謹、文辭暢達。請只輸出純JSON：
-{"score":數字,"grade":"A+/A/B+/B/C+/C","overall":"整體評語2-3句","strengths":["優點1","優點2"],"weaknesses":["需改善處1","需改善處2"],"suggestions":["具體建議1","具體建議2","具體建議3"],"rewrite":"【改寫範例】選論述最薄弱的一段提供改寫版本"}`,
-  'gsat-chi-qy': `你是台灣學測國語文寫作能力測驗（國寫）閱卷委員，批改情意題。評分六級制：A+（22-25分）A（18-21分）B+（14-17分）B（10-13分）C+（6-9分）C（1-5分），滿分25分。情意題重點：情感深刻、具體書寫獨特感思、結構嚴謹、文辭洗練。請只輸出純JSON：
-{"score":數字,"grade":"A+/A/B+/B/C+/C","overall":"整體評語2-3句","strengths":["優點1","優點2"],"weaknesses":["需改善處1","需改善處2"],"suggestions":["具體建議1","具體建議2","具體建議3"],"rewrite":"【改寫範例】選情感表達最不足的一段提供更豐富的改寫版本"}`,
-  'gsat-trans': `你是台灣學測英文中譯英閱卷委員。評分標準：每題滿分4分，每個語法或用字錯誤扣0.5分（扣完為止），相同拼字錯誤只扣一次，句首未大寫或標點不妥各扣0.5分（只扣一次）。請只輸出純JSON：
-{"s1":{"score":數字,"errors":["錯誤說明（若無填空陣列）"],"reference":"較佳參考譯法","comment":"簡短評語"},"s2":{"score":數字,"errors":["錯誤說明（若無填空陣列）"],"reference":"較佳參考譯法","comment":"簡短評語"},"total":數字,"overall":"整體學習建議"}`,
-  'bcap-chi': `你是台灣國中教育會考寫作測驗閱卷委員。六級分制評分標準：6級分（立意豐富、組織嚴謹、遣詞精確生動、幾無錯別字）、5級分（立意適切、組織完整、文辭流暢、少許錯誤）、4級分（立意平實、組織尚可、文辭平順）、3級分（立意不夠明確、組織不完整）、2級分（立意不明、組織混亂）、1級分（無法掌握題旨）、0分（完全離題或空白）。請只輸出純JSON：
-{"score":數字,"label":"X級分","dims":[{"name":"立意取材","comment":"評語"},{"name":"組織結構","comment":"評語"},{"name":"遣詞造句","comment":"評語"},{"name":"格式標點","comment":"評語"}],"overall":"整體評語2-3句","suggestions":["具體建議1","具體建議2","具體建議3"],"rewrite":"【改寫範例】選最需改善的一段提供改寫版本"}`
-};
-
-function saveKey() {
-  const v = document.getElementById('api-key-input').value.trim();
-  if (!v) return;
-  savedKey = v;
-  document.getElementById('api-saved').style.display = 'block';
+function goTo(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
 }
 
-function goTo(p) {
-  document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
-  if (p === 'home') { document.getElementById('page-home').classList.add('active'); return; }
-  currentType = p;
-  const c = cfg[p];
+function logout() {
+  localStorage.removeItem('pipi_user');
+  user = null;
+  document.getElementById('user-badge').style.display = 'none';
+  document.getElementById('logout-btn').style.display = 'none';
+  goTo('welcome');
+}
+
+// ── Welcome ──
+function selectIdentity(identity) {
+  const pill = document.getElementById('register-identity-pill');
+  pill.textContent = identity === 'junior' ? '📚 國中生' : '🎓 高中生';
+
+  const gradeSelect = document.getElementById('reg-grade');
+  const subjectSelect = document.getElementById('reg-subject');
+  gradeSelect.innerHTML = '<option value="">請選擇</option>';
+  subjectSelect.innerHTML = '<option value="">請選擇</option>';
+
+  if (identity === 'junior') {
+    ['國一','國二','國三'].forEach(g => gradeSelect.innerHTML += `<option>${g}</option>`);
+    ['會考國文作文'].forEach(s => subjectSelect.innerHTML += `<option>${s}</option>`);
+  } else {
+    ['高一','高二','高三'].forEach(g => gradeSelect.innerHTML += `<option>${g}</option>`);
+    ['學測英文作文','學測國文國寫','學測中譯英','全部都要加強'].forEach(s => subjectSelect.innerHTML += `<option>${s}</option>`);
+  }
+
+  localStorage.setItem('pipi_pending_identity', identity);
+  goTo('register');
+}
+
+// ── Register ──
+async function doRegister() {
+  const name = document.getElementById('reg-name').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const grade = document.getElementById('reg-grade').value;
+  const school = document.getElementById('reg-school').value.trim();
+  const subject = document.getElementById('reg-subject').value;
+  const apikey = document.getElementById('reg-apikey').value.trim();
+  const identity = localStorage.getItem('pipi_pending_identity') || 'senior';
+  const errDiv = document.getElementById('reg-err');
+  errDiv.style.display = 'none';
+
+  if (!name) { errDiv.textContent = '請填寫姓名'; errDiv.style.display = 'block'; return; }
+  if (!email || !email.includes('@')) { errDiv.textContent = '請填寫正確的 Gmail'; errDiv.style.display = 'block'; return; }
+  if (!grade) { errDiv.textContent = '請選擇年級'; errDiv.style.display = 'block'; return; }
+  if (!subject) { errDiv.textContent = '請選擇想加強的科目'; errDiv.style.display = 'block'; return; }
+  if (!apikey || !apikey.startsWith('gsk_')) { errDiv.textContent = '請填寫正確的 Groq API Key（以 gsk_ 開頭）'; errDiv.style.display = 'block'; return; }
+
+  user = { name, email, grade, school, subject, apikey, identity };
+  localStorage.setItem('pipi_user', JSON.stringify(user));
+
+  // 送資料到 Google 試算表
+  try {
+    await fetch(SHEET_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, identity: identity==='junior'?'國中生':'高中生', grade, school, subject, timestamp: new Date().toLocaleString('zh-TW') })
+    });
+  } catch(e) { /* 靜默失敗，不影響使用 */ }
+
+  showHome();
+}
+
+// ── Home ──
+function showHome() {
+  if (!user) return;
+  document.getElementById('user-badge').textContent = user.name;
+  document.getElementById('user-badge').style.display = 'inline-flex';
+  document.getElementById('logout-btn').style.display = 'inline';
+
+  document.getElementById('home-greeting').textContent = `嗨，${user.name} 👋`;
+  document.getElementById('home-sub').textContent = user.identity === 'junior'
+    ? '選擇題型，開始讓批批老師幫你批改作文！'
+    : '選擇題型，開始讓批批老師幫你批改作文！';
+
+  const grid = document.getElementById('type-grid');
+  grid.innerHTML = '';
+
+  const juniorTypes = [
+    { id:'bcap-chi', tag:'tag-red', tagText:'會考', name:'國文作文', desc:'立意・組織・遣詞・格式標點', score:'滿分 6 級分' }
+  ];
+  const seniorTypes = [
+    { id:'gsat-eng', tag:'tag-blue', tagText:'學測', name:'英文作文', desc:'內容・組織・文法句構<br>字彙拼字・體例', score:'滿分 20 分・五項評分' },
+    { id:'gsat-chi', tag:'tag-green', tagText:'學測', name:'國文國寫', desc:'知性題或情意題<br>六級分制評分', score:'滿分 25 分・A+/A/B+/B/C+/C' },
+    { id:'gsat-trans', tag:'tag-amber', tagText:'學測', name:'中譯英', desc:'逐句評分<br>每個錯誤扣 0.5 分', score:'每題 4 分・共 8 分' }
+  ];
+
+  const types = user.identity === 'junior' ? juniorTypes : seniorTypes;
+  types.forEach(t => {
+    grid.innerHTML += `<button class="type-card" onclick="goToGrade('${t.id}')">
+      <span class="type-tag ${t.tag}">${t.tagText}</span>
+      <div class="type-name">${t.name}</div>
+      <div class="type-desc">${t.desc}</div>
+      <div class="type-score">${t.score}</div>
+    </button>`;
+  });
+
+  renderHistory();
+  goTo('home');
+}
+
+// ── History ──
+function getHistory() {
+  return JSON.parse(localStorage.getItem('pipi_history') || '[]');
+}
+function saveHistory(item) {
+  const h = getHistory();
+  h.unshift(item);
+  if (h.length > 20) h.pop();
+  localStorage.setItem('pipi_history', JSON.stringify(h));
+}
+function renderHistory() {
+  const h = getHistory();
+  const el = document.getElementById('history-list');
+  if (!h.length) { el.innerHTML = '<div class="history-empty">還沒有批改紀錄，快去批改你的第一篇作文吧！</div>'; return; }
+  el.innerHTML = h.map((item, i) => `
+    <div class="history-item" onclick="showHistoryResult(${i})">
+      <div>
+        <div class="history-title">${item.label}</div>
+        <div class="history-meta">${item.date}・${item.preview}</div>
+      </div>
+      <div class="history-score">${item.scoreText}</div>
+    </div>`).join('');
+}
+function showHistoryResult(i) {
+  const h = getHistory();
+  const item = h[i];
+  currentType = item.type;
+  goToGrade(item.type, true);
+  setTimeout(() => {
+    const result = document.getElementById('grade-result');
+    renderResult(item.type, item.data, result);
+  }, 100);
+}
+
+// ── Grade page ──
+const typeCfg = {
+  'gsat-eng':{ title:'英文作文', desc:'內容 5 + 組織 5 + 文法句構 4 + 字彙拼字 4 + 體例 2 = 20 分', showSub:false, showTitle:true, titleLabel:'作文題目或提示（選填）', titlePH:'e.g. Write about a challenge you overcame', textPH:'Paste your English essay here...', wcTarget:120, wcUnit:'words' },
+  'gsat-chi':{ title:'國文國寫', desc:'知性題或情意題，六級分制（A+ 到 C），滿分 25 分', showSub:true, showTitle:true, titleLabel:'題目或題幹（建議填寫）', titlePH:'例：說明對「標籤」現象的看法', textPH:'在這裡貼上國寫作文...', wcTarget:0, wcUnit:'字' },
+  'gsat-trans':{ title:'中譯英', desc:'每題 4 分，每個錯誤扣 0.5 分，共 8 分', showSub:false, showTitle:false, textPH:'格式：\n第一句中文\n第一句英文翻譯\n\n第二句中文\n第二句英文翻譯', wcTarget:0, wcUnit:'字' },
+  'bcap-chi':{ title:'國文作文（會考）', desc:'六級分制：立意取材・組織結構・遣詞造句・格式標點', showSub:false, showTitle:true, titleLabel:'作文題目（選填）', titlePH:'例：在那段與眾不同的日子裡', textPH:'在這裡貼上作文...', wcTarget:0, wcUnit:'字' }
+};
+
+function goToGrade(type, skipReset) {
+  currentType = type;
+  const c = typeCfg[type];
   document.getElementById('grade-title').textContent = c.title;
   document.getElementById('grade-desc').textContent = c.desc;
   document.getElementById('sub-toggle-wrap').style.display = c.showSub ? 'block' : 'none';
   const tf = document.getElementById('title-field');
   tf.style.display = c.showTitle ? 'block' : 'none';
-  if (c.showTitle) {
-    document.getElementById('title-label').textContent = c.titleLabel;
-    document.getElementById('title-input').placeholder = c.titlePH;
-    document.getElementById('title-input').value = '';
-  }
+  if (c.showTitle) { document.getElementById('title-label').textContent = c.titleLabel; document.getElementById('title-input').placeholder = c.titlePH; }
   document.getElementById('main-textarea').placeholder = c.textPH;
-  document.getElementById('main-textarea').value = '';
-  document.getElementById('grade-result').style.display = 'none';
-  document.getElementById('grade-err').style.display = 'none';
-  document.getElementById('img-limit-note').style.display = 'none';
-  if (savedKey) document.getElementById('api-key-input').value = savedKey;
-  clearImg(); switchTab('text'); chiMode = 'zx';
-  document.getElementById('chi-btn-zx') && (document.getElementById('chi-btn-zx').className = 'sub-btn active');
-  document.getElementById('chi-btn-qy') && (document.getElementById('chi-btn-qy').className = 'sub-btn');
-  document.getElementById('page-grade').classList.add('active');
-}
-
-function switchTab(t) {
-  currentTab = t;
-  ['text','img'].forEach(x => {
-    document.getElementById('tab-'+x).className = 'tab-btn'+(t===x?' active':'');
-    document.getElementById('input-'+x+'-area').style.display = t===x?'block':'none';
-  });
-  document.getElementById('img-limit-note').style.display = t==='img' ? 'block' : 'none';
+  if (!skipReset) {
+    document.getElementById('main-textarea').value = '';
+    document.getElementById('title-input') && (document.getElementById('title-input').value = '');
+    document.getElementById('grade-result').style.display = 'none';
+    document.getElementById('grade-err').style.display = 'none';
+    document.getElementById('wc-display').textContent = '0 ' + (c.wcUnit==='words'?'words':'字');
+    document.getElementById('wc-hint').textContent = '';
+  }
+  chiMode = 'zx';
+  if (document.getElementById('chi-btn-zx')) {
+    document.getElementById('chi-btn-zx').className = 'sub-btn active';
+    document.getElementById('chi-btn-qy').className = 'sub-btn';
+  }
+  goTo('grade');
 }
 
 function setChiMode(m) {
   chiMode = m;
-  ['zx','qy'].forEach(x => {
-    document.getElementById('chi-btn-'+x).className = 'sub-btn'+(m===x?' active':'');
-  });
+  ['zx','qy'].forEach(x => { document.getElementById('chi-btn-'+x).className = 'sub-btn'+(m===x?' active':''); });
 }
 
-function handleDrop(e) {
-  e.preventDefault();
-  document.getElementById('drop-zone').classList.remove('drag');
-  const f = e.dataTransfer.files[0];
-  if (f && f.type.startsWith('image/')) handleFile(f);
-}
-function handleFile(f) {
-  if (!f) return;
-  const r = new FileReader();
-  r.onload = e => {
-    imgB64 = e.target.result.split(',')[1];
-    document.getElementById('preview-img').src = e.target.result;
-    document.getElementById('preview-wrap').style.display = 'block';
-    document.getElementById('drop-zone').style.display = 'none';
-  };
-  r.readAsDataURL(f);
-}
-function clearImg() {
-  imgB64 = null;
-  document.getElementById('preview-wrap').style.display = 'none';
-  document.getElementById('drop-zone').style.display = 'block';
-  document.getElementById('file-input').value = '';
-}
+// Word count
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('main-textarea').addEventListener('input', function() {
+    const c = typeCfg[currentType];
+    if (!c) return;
+    let count, display;
+    if (c.wcUnit === 'words') {
+      count = this.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+      display = count + ' words';
+      const hint = document.getElementById('wc-hint');
+      if (c.wcTarget && count < c.wcTarget) {
+        hint.textContent = `建議至少 ${c.wcTarget} 字`;
+        hint.className = 'wc-warn';
+      } else {
+        hint.textContent = count >= c.wcTarget ? '✓ 字數達標' : '';
+        hint.className = '';
+      }
+    } else {
+      count = this.value.replace(/\s/g,'').length;
+      display = count + ' 字';
+    }
+    document.getElementById('wc-display').textContent = display;
+  });
+});
+
+// ── System prompts ──
+const systemPrompts = {
+  'gsat-eng': `你是台灣學測英文作文閱卷委員，依照大考中心官方評分標準批改。請只輸出純JSON，不要任何markdown：
+{"total":數字,"grade_label":"特優/優/可/差/劣","items":[{"name":"內容 Content","score":數字,"max":5,"comment":"繁體中文評語"},{"name":"組織 Organization","score":數字,"max":5,"comment":"繁體中文評語"},{"name":"文法與句構 Grammar","score":數字,"max":4,"comment":"繁體中文評語"},{"name":"字彙與拼字 Vocabulary","score":數字,"max":4,"comment":"繁體中文評語"},{"name":"體例 Mechanics","score":數字,"max":2,"comment":"繁體中文評語"}],"overall":"整體評語2-3句","suggestions":["建議1","建議2","建議3"],"rewrite":"【改寫範例】選最需改善的一段提供改寫"}`,
+  'gsat-chi-zx': `你是台灣學測國寫閱卷委員批改知性題（滿分25分，A+19-21/A15-18/B+12-14/B8-11/C+5-7/C1-4）。只輸出純JSON：
+{"score":數字,"grade":"A+/A/B+/B/C+/C","overall":"整體評語","strengths":["優點1","優點2"],"weaknesses":["缺點1","缺點2"],"suggestions":["建議1","建議2","建議3"],"rewrite":"【改寫範例】"}`,
+  'gsat-chi-qy': `你是台灣學測國寫閱卷委員批改情意題（滿分25分，A+22-25/A18-21/B+14-17/B10-13/C+6-9/C1-5）。只輸出純JSON：
+{"score":數字,"grade":"A+/A/B+/B/C+/C","overall":"整體評語","strengths":["優點1","優點2"],"weaknesses":["缺點1","缺點2"],"suggestions":["建議1","建議2","建議3"],"rewrite":"【改寫範例】"}`,
+  'gsat-trans': `你是台灣學測中譯英閱卷委員（每題4分，每錯扣0.5分）。只輸出純JSON：
+{"s1":{"score":數字,"errors":["錯誤說明"],"reference":"較佳譯法","comment":"評語"},"s2":{"score":數字,"errors":["錯誤說明"],"reference":"較佳譯法","comment":"評語"},"total":數字,"overall":"整體建議"}`,
+  'bcap-chi': `你是台灣國中教育會考寫作測驗閱卷委員（六級分制）。只輸出純JSON：
+{"score":數字,"label":"X級分","dims":[{"name":"立意取材","comment":"評語"},{"name":"組織結構","comment":"評語"},{"name":"遣詞造句","comment":"評語"},{"name":"格式標點","comment":"評語"}],"overall":"整體評語","suggestions":["建議1","建議2","建議3"],"rewrite":"【改寫範例】"}`
+};
 
 async function doGrade() {
-  const apiKey = document.getElementById('api-key-input').value.trim() || savedKey;
   const errDiv = document.getElementById('grade-err');
   const loading = document.getElementById('grade-loading');
   const result = document.getElementById('grade-result');
   errDiv.style.display='none'; result.style.display='none';
 
-  if (!apiKey || !apiKey.startsWith('gsk_')) {
-    errDiv.textContent = '請填入正確的 Groq API Key（以 gsk_ 開頭）';
-    errDiv.style.display='block'; return;
-  }
   const textVal = document.getElementById('main-textarea').value.trim();
-  if (textVal.length < 15) {
-    errDiv.textContent = '請貼上至少 15 字的內容再批改';
-    errDiv.style.display='block'; return;
-  }
+  if (textVal.length < 15) { errDiv.textContent='請貼上至少 15 字的內容再批改'; errDiv.style.display='block'; return; }
 
   const btn = document.getElementById('grade-btn');
   btn.disabled=true; loading.style.display='block';
@@ -388,104 +539,75 @@ async function doGrade() {
   try {
     const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
-      },
+      headers: { 'Content-Type':'application/json', 'Authorization':`Bearer ${user.apikey}` },
       body: JSON.stringify({
         model: 'llama-3.3-70b-versatile',
         temperature: 0.3,
         max_tokens: 1024,
-        response_format: { type: 'json_object' },
-        messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: userContent }
-        ]
+        response_format: { type:'json_object' },
+        messages: [{ role:'system', content:systemPrompt }, { role:'user', content:userContent }]
       })
     });
-
     const data = await res.json();
-    if (data.error) {
-      errDiv.textContent = 'API 錯誤：' + data.error.message;
-      errDiv.style.display='block'; return;
-    }
-
+    if (data.error) { errDiv.textContent='API 錯誤：'+data.error.message; errDiv.style.display='block'; return; }
     const raw = data.choices?.[0]?.message?.content || '';
     const parsed = JSON.parse(raw.replace(/```json|```/g,'').trim());
-    savedKey = apiKey;
+
+    // 儲存歷史
+    const scoreText = currentType==='gsat-eng' ? `${parsed.total}/20` : currentType==='gsat-chi' ? `${parsed.score}/25 ${parsed.grade}` : currentType==='gsat-trans' ? `${parsed.total}/8` : `${parsed.score}級分`;
+    const label = typeCfg[currentType].title + (titleVal ? `・${titleVal}` : '');
+    const preview = textVal.substring(0, 20) + '...';
+    const date = new Date().toLocaleDateString('zh-TW');
+    saveHistory({ type:currentType, label, preview, date, scoreText, data:parsed });
+    renderHistory();
+
     renderResult(currentType, parsed, result);
   } catch(e) {
-    errDiv.textContent = '批改時發生錯誤，請確認 API Key 是否正確。' + e.message;
+    errDiv.textContent='批改時發生錯誤，請確認 API Key 是否正確。';
     errDiv.style.display='block';
   } finally {
     btn.disabled=false; loading.style.display='none';
   }
 }
 
-function rcard(title, body) {
-  return `<div class="rcard"><div class="rcard-title">${title}</div>${body}</div>`;
-}
+// ── Render ──
+function rcard(title, body) { return `<div class="rcard"><div class="rcard-title">${title}</div>${body}</div>`; }
 function barRow(name, score, max, comment) {
   const p = Math.round(score/max*100);
   return `<div class="bar-wrap"><div class="bar-top"><span>${name}</span><span>${score}/${max}</span></div><div class="bar-track"><div class="bar-fill" style="width:${p}%"></div></div>${comment?`<div class="bar-note">${comment}</div>`:''}</div>`;
 }
-function suggList(arr) {
-  return (arr||[]).map((s,i) => `<div class="sugg-item"><span class="sugg-n">${i+1}</span><span>${s}</span></div>`).join('');
-}
+function suggList(arr) { return (arr||[]).map((s,i)=>`<div class="sugg-item"><span class="sugg-n">${i+1}</span><span>${s}</span></div>`).join(''); }
 
 function renderResult(type, r, el) {
   let h = '';
-
   if (type==='gsat-eng') {
-    h += `<div class="score-row">
-      <div class="score-box"><div class="score-lbl">總分</div><div class="score-num">${r.total}<sub>/20</sub></div></div>
-      <div class="score-box"><div class="score-lbl">等級</div><div class="score-grade">${r.grade_label}</div></div>
-    </div>`;
-    h += rcard('分項評分', r.items.map(it => barRow(it.name,it.score,it.max,it.comment)).join(''));
+    h += `<div class="score-row"><div class="score-box"><div class="score-lbl">總分</div><div class="score-num">${r.total}<sub>/20</sub></div></div><div class="score-box"><div class="score-lbl">等級</div><div class="score-grade">${r.grade_label}</div></div></div>`;
+    h += rcard('分項評分', r.items.map(it=>barRow(it.name,it.score,it.max,it.comment)).join(''));
     h += rcard('整體評語', `<p class="overall-p">${r.overall}</p>`);
     h += rcard('改善建議', suggList(r.suggestions));
     h += rcard('改寫範例', `<div class="rewrite-box">${r.rewrite}</div>`);
   }
-
   if (type==='gsat-chi') {
-    h += `<div class="score-row">
-      <div class="score-box"><div class="score-lbl">分數</div><div class="score-num">${r.score}<sub>/25</sub></div></div>
-      <div class="score-box"><div class="score-lbl">等級</div><div class="score-grade">${r.grade}</div></div>
-    </div>`;
+    h += `<div class="score-row"><div class="score-box"><div class="score-lbl">分數</div><div class="score-num">${r.score}<sub>/25</sub></div></div><div class="score-box"><div class="score-lbl">等級</div><div class="score-grade">${r.grade}</div></div></div>`;
     h += rcard('整體評語', `<p class="overall-p">${r.overall}</p>`);
-    h += rcard('優缺點分析', `<div class="sw-grid">
-      <div><div class="sw-lbl pos">✓ 優點</div>${(r.strengths||[]).map(s=>`<div class="sw-item">${s}</div>`).join('')}</div>
-      <div><div class="sw-lbl neg">✗ 需改善</div>${(r.weaknesses||[]).map(s=>`<div class="sw-item">${s}</div>`).join('')}</div>
-    </div>`);
+    h += rcard('優缺點分析', `<div class="sw-grid"><div><div class="sw-lbl pos">✓ 優點</div>${(r.strengths||[]).map(s=>`<div class="sw-item">${s}</div>`).join('')}</div><div><div class="sw-lbl neg">✗ 需改善</div>${(r.weaknesses||[]).map(s=>`<div class="sw-item">${s}</div>`).join('')}</div></div>`);
     h += rcard('改善建議', suggList(r.suggestions));
     h += rcard('改寫範例', `<div class="rewrite-box">${r.rewrite}</div>`);
   }
-
   if (type==='gsat-trans') {
-    const rs = (s, n) => rcard(`第 ${n} 句・${s.score}/4 分`,
-      `${s.errors&&s.errors.length ? `<div class="err-list">${s.errors.join('<br>')}</div>` : `<div class="no-err">✓ 無明顯錯誤</div>`}
-      <div class="ref-lbl">參考譯法</div>
-      <div class="ref-text">${s.reference}</div>
-      <div class="bar-note" style="margin-top:6px">${s.comment}</div>`);
-    h += `<div class="score-box" style="margin-bottom:1rem;text-align:center">
-      <div class="score-lbl">總分</div><div class="score-num">${r.total}<sub>/8</sub></div>
-    </div>`;
-    h += rs(r.s1,1) + rs(r.s2,2);
+    const rs = (s,n) => rcard(`第 ${n} 句・${s.score}/4 分`, `${s.errors&&s.errors.length?`<div class="err-list">${s.errors.join('<br>')}</div>`:`<div class="no-err">✓ 無明顯錯誤</div>`}<div class="ref-lbl">參考譯法</div><div class="ref-text">${s.reference}</div><div class="bar-note" style="margin-top:6px">${s.comment}</div>`);
+    h += `<div class="score-box" style="margin-bottom:1rem;text-align:center"><div class="score-lbl">總分</div><div class="score-num">${r.total}<sub>/8</sub></div></div>`;
+    h += rs(r.s1,1)+rs(r.s2,2);
     h += rcard('整體建議', `<p class="overall-p">${r.overall}</p>`);
   }
-
   if (type==='bcap-chi') {
     const stars = '●'.repeat(r.score)+'○'.repeat(Math.max(0,6-r.score));
-    h += `<div class="score-row">
-      <div class="score-box"><div class="score-lbl">級分</div><div class="score-num" style="color:var(--red)">${r.score}<sub>/6</sub></div><div class="stars">${stars}</div></div>
-      <div class="score-box"><div class="score-lbl">等第</div><div class="score-grade" style="color:var(--red);font-size:20px;padding-top:6px">${r.label}</div></div>
-    </div>`;
+    h += `<div class="score-row"><div class="score-box"><div class="score-lbl">級分</div><div class="score-num">${r.score}<sub>/6</sub></div><div class="stars">${stars}</div></div><div class="score-box"><div class="score-lbl">等第</div><div class="score-grade" style="font-size:20px;padding-top:6px">${r.label}</div></div></div>`;
     h += rcard('四面向評語', (r.dims||[]).map(d=>`<div class="dim-item"><div class="dim-name">${d.name}</div><div class="dim-comment">${d.comment}</div></div>`).join(''));
     h += rcard('整體評語', `<p class="overall-p">${r.overall}</p>`);
     h += rcard('改善建議', suggList(r.suggestions));
     h += rcard('改寫範例', `<div class="rewrite-box">${r.rewrite}</div>`);
   }
-
   el.innerHTML = h;
   el.style.display = 'block';
   el.scrollIntoView({ behavior:'smooth', block:'start' });
