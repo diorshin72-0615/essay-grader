@@ -284,7 +284,7 @@ textarea.essay-box:focus{border-color:var(--border-mid)}
 </div>
 
 <script>
-const SHEET_URL = 'https://script.google.com/macros/s/AKfycbygTP7OrHSg1iisnVeTnAimNvAt8EZ9R_IVYfam0LsnyCr5uatc_UPPgLHBGyBup7dk/exec';
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbw5MxUoFKAOGOYtceR9sI68YmCc8-yMSnGc1z44foRJHl2pFJXc-H7l53pPE5PrbiVr/exec';
 
 let currentType = '', chiMode = 'zx';
 let user = null;
@@ -360,8 +360,7 @@ async function doRegister() {
   try {
     await fetch(SHEET_URL, {
       method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify({ name, email, identity: identity==='junior'?'國中生':'高中生', grade, school, subject, timestamp: new Date().toLocaleString('zh-TW') })
     });
   } catch(e) { /* 靜默失敗，不影響使用 */ }
