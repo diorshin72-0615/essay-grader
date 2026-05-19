@@ -156,7 +156,13 @@ textarea.essay-box:focus{border-color:var(--border-mid)}
 <body>
 
 <header class="site-header">
-  <div class="logo">批批 <span class="logo-pip">PiPi</span> AI</div>
+  <div style="display:flex;align-items:center;gap:12px">
+    <button id="header-back-btn" onclick="headerBack()" style="display:none;background:none;border:none;cursor:pointer;font-size:13px;color:var(--text-2);padding:0;align-items:center;gap:4px">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 12L6 8l4-4"/></svg>
+      返回
+    </button>
+    <div class="logo">批批 <span class="logo-pip">PiPi</span> AI</div>
+  </div>
   <div class="header-right">
     <span class="user-badge" id="user-badge"></span>
     <button class="logout-btn" id="logout-btn" onclick="logout()" style="display:none">登出</button>
@@ -300,9 +306,23 @@ window.onload = function() {
   }
 };
 
+function updateHeaderBack(page) {
+  const btn = document.getElementById('header-back-btn');
+  if (page === 'register') {
+    btn.style.display = 'inline-flex';
+  } else {
+    btn.style.display = 'none';
+  }
+}
+
+function headerBack() {
+  goTo('welcome');
+}
+
 function goTo(page) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + page).classList.add('active');
+  updateHeaderBack(page);
 }
 
 function logout() {
