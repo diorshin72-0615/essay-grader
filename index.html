@@ -28,14 +28,16 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-hei
 .site-header{padding:.875rem 1.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:var(--surface);position:sticky;top:0;z-index:10}
 .logo{font-family:var(--font-serif);font-size:18px;font-weight:700;letter-spacing:-.01em}
 .logo-pip{color:var(--pink)}
+.header-left{display:flex;align-items:center;gap:12px}
 .header-right{display:flex;align-items:center;gap:12px}
 .user-badge{font-size:12px;color:var(--text-2);background:var(--bg);border:1px solid var(--border);padding:4px 10px;border-radius:20px;display:none}
 .logout-btn{font-size:12px;color:var(--text-3);background:none;border:none;cursor:pointer;padding:0}
-.logout-btn:hover{color:var(--text)}
+.header-back-btn{display:none;background:none;border:none;cursor:pointer;font-size:13px;color:var(--text-2);padding:0;align-items:center;gap:4px}
+.header-back-btn.show{display:inline-flex}
 
 main{max-width:680px;margin:0 auto;padding:2rem 1.5rem}
 
-/* Welcome page */
+/* Welcome */
 .welcome-wrap{min-height:calc(100vh - 57px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 1.5rem;max-width:500px;margin:0 auto}
 .welcome-emoji{font-size:56px;margin-bottom:1rem;display:block}
 .welcome-title{font-family:var(--font-serif);font-size:32px;font-weight:700;margin-bottom:8px;line-height:1.2}
@@ -48,7 +50,7 @@ main{max-width:680px;margin:0 auto;padding:2rem 1.5rem}
 .identity-label{font-size:16px;font-weight:600;margin-bottom:4px}
 .identity-desc{font-size:12px;color:var(--text-3)}
 
-/* Register page */
+/* Register */
 .register-wrap{max-width:480px;margin:0 auto;padding:2rem 1.5rem}
 .form-title{font-family:var(--font-serif);font-size:24px;font-weight:700;margin-bottom:4px}
 .form-sub{font-size:14px;color:var(--text-2);margin-bottom:2rem}
@@ -60,11 +62,11 @@ input:focus,select:focus,textarea:focus{border-color:var(--border-mid)}
 select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239C9A96' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
 .api-hint{font-size:12px;color:var(--text-3);margin-top:5px}
 .api-hint a{color:var(--blue);text-decoration:none}
-.register-btn{width:100%;margin-top:8px;padding:12px;font-size:15px;font-weight:600;border-radius:var(--radius);border:none;cursor:pointer;background:var(--pink);color:#fff;transition:opacity .15s;letter-spacing:.01em}
+.register-btn{width:100%;margin-top:8px;padding:12px;font-size:15px;font-weight:600;border-radius:var(--radius);border:none;cursor:pointer;background:var(--pink);color:#fff;transition:opacity .15s}
 .register-btn:hover{opacity:.88}
 .identity-pill{display:inline-flex;align-items:center;gap:6px;background:var(--pink-bg);color:var(--pink);border:1px solid var(--pink-border);border-radius:20px;font-size:12px;font-weight:600;padding:4px 12px;margin-bottom:1.5rem}
 
-/* Home page */
+/* Home */
 .home-greeting{font-family:var(--font-serif);font-size:24px;font-weight:700;margin-bottom:4px}
 .home-sub{font-size:14px;color:var(--text-2);margin-bottom:1.75rem}
 .section-label{font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
@@ -77,45 +79,68 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
 .tag-amber{background:var(--amber-bg);color:var(--amber)}
 .tag-red{background:var(--red-bg);color:var(--red)}
 .tag-pink{background:var(--pink-bg);color:var(--pink)}
+.tag-purple{background:#F5F3FF;color:#7C3AED}
 .type-name{font-size:15px;font-weight:600;margin-bottom:4px;color:var(--text)}
 .type-desc{font-size:12px;color:var(--text-2);line-height:1.5}
 .type-score{font-size:11px;color:var(--text-3);margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
 
-/* History section */
-.history-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem}
+/* History */
+.history-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem;margin-bottom:1.5rem}
 .history-empty{font-size:13px;color:var(--text-3);text-align:center;padding:1rem 0}
-.history-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);cursor:pointer}
+.history-item{border-bottom:1px solid var(--border);cursor:pointer}
 .history-item:last-child{border-bottom:none}
-.history-item:hover .history-title{color:var(--blue)}
+.history-header{display:flex;justify-content:space-between;align-items:center;padding:10px 0}
+.history-header:hover .history-title{color:var(--pink)}
 .history-title{font-size:13px;font-weight:500;color:var(--text)}
-.history-meta{font-size:12px;color:var(--text-3)}
-.history-score{font-size:13px;font-weight:600;color:var(--pink)}
+.history-meta{font-size:12px;color:var(--text-3);margin-top:1px}
+.history-score{font-size:13px;font-weight:600;color:var(--pink);flex-shrink:0;margin-left:12px}
+.history-body{display:none;padding-bottom:12px}
+.history-body.open{display:block}
 
 /* Grade page */
 .back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text-2);background:none;border:none;cursor:pointer;padding:0;margin-bottom:1.5rem}
 .back-btn:hover{color:var(--text)}
 .grade-title{font-family:var(--font-serif);font-size:22px;font-weight:700;margin-bottom:4px}
 .grade-desc{font-size:13px;color:var(--text-2);margin-bottom:1.25rem}
-.sub-toggle{display:flex;gap:8px;margin-bottom:12px}
-.sub-btn{padding:5px 14px;border-radius:20px;font-size:13px;border:1px solid var(--border);background:var(--surface);color:var(--text-2);cursor:pointer;font-weight:500}
-.sub-btn.active{background:var(--text);color:#fff;border-color:var(--text)}
-.field-label-sm{font-size:13px;color:var(--text-2);display:block;margin-bottom:6px;font-weight:500}
 .grade-field{margin-bottom:12px}
+.field-label-sm{font-size:13px;color:var(--text-2);display:block;margin-bottom:6px;font-weight:500}
 textarea.essay-box{width:100%;border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;font-family:var(--font-body);font-size:14px;color:var(--text);background:var(--surface);outline:none;transition:border-color .15s;display:block;height:160px;resize:vertical;line-height:1.7}
 textarea.essay-box:focus{border-color:var(--border-mid)}
 .wc-row{display:flex;justify-content:space-between;font-size:12px;color:var(--text-3);margin-top:4px}
 .wc-warn{color:var(--amber)}
+
+/* Tabs */
+.tab-row{display:flex;gap:6px;margin-bottom:1rem;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:4px}
+.tab-btn{flex:1;padding:7px;border-radius:7px;font-size:13px;font-weight:500;border:none;cursor:pointer;background:transparent;color:var(--text-2);transition:all .15s}
+.tab-btn.active{background:var(--surface);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+
+/* Drop zone */
+.drop-zone{border:1.5px dashed var(--border-mid);border-radius:var(--radius-lg);padding:2rem 1.5rem;text-align:center;cursor:pointer;background:var(--bg);transition:all .15s}
+.drop-zone:hover,.drop-zone.drag{border-color:var(--pink);background:var(--pink-bg)}
+.drop-icon{font-size:32px;margin-bottom:8px;display:block}
+.drop-title{font-size:14px;font-weight:500;margin-bottom:4px;color:var(--text)}
+.drop-sub{font-size:12px;color:var(--text-3)}
+.preview-img{max-width:100%;max-height:200px;border-radius:var(--radius);border:1px solid var(--border);display:block;margin-top:10px}
+.remove-btn{margin-top:8px;font-size:12px;color:var(--text-3);background:none;border:1px solid var(--border);border-radius:20px;padding:3px 10px;cursor:pointer}
+
+/* Buttons */
 .submit-btn{width:100%;margin-top:14px;padding:12px;font-size:15px;font-weight:600;border-radius:var(--radius);border:none;cursor:pointer;background:var(--pink);color:#fff;transition:opacity .15s}
 .submit-btn:hover{opacity:.88}
 .submit-btn:disabled{opacity:.4;cursor:not-allowed}
+.outline-btn{padding:8px 16px;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface);font-size:13px;font-weight:500;cursor:pointer;color:var(--text-2)}
+.outline-btn:hover{border-color:var(--border-mid);color:var(--text)}
+
+/* Loading */
 .loading{display:none;text-align:center;padding:2.5rem 0;color:var(--text-2);font-size:14px}
 .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--text-3);animation:pulse 1.2s ease-in-out infinite;margin:0 2px}
 .dot:nth-child(2){animation-delay:.2s}.dot:nth-child(3){animation-delay:.4s}
 @keyframes pulse{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
+
+/* Err */
 .err-box{display:none;color:var(--red);font-size:13px;margin-top:12px;background:var(--red-bg);padding:10px 14px;border-radius:var(--radius);border:1px solid var(--red-border)}
-.result-area{display:none;margin-top:1.5rem}
 
 /* Results */
+.result-area{display:none;margin-top:1.5rem}
 .score-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1rem}
 .score-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;text-align:center}
 .score-lbl{font-size:11px;color:var(--text-3);margin-bottom:4px;font-weight:500;text-transform:uppercase;letter-spacing:.06em}
@@ -147,17 +172,23 @@ textarea.essay-box:focus{border-color:var(--border-mid)}
 .dim-comment{font-size:13px;color:var(--text-2)}
 
 /* Weakness */
-.weakness-section{margin-top:1rem}
 .weakness-card{background:var(--pink-bg);border:1px solid var(--pink-border);border-radius:var(--radius-lg);padding:1rem 1.25rem;margin-bottom:12px}
-.weakness-title{font-size:13px;font-weight:600;color:var(--pink);margin-bottom:6px}
-.weakness-text{font-size:13px;color:var(--text-2);line-height:1.6}
+.weakness-locked{background:var(--bg);border:1px dashed var(--border-mid);border-radius:var(--radius-lg);padding:1rem 1.25rem;text-align:center;font-size:13px;color:var(--text-3);margin-bottom:12px}
+.weakness-lock-icon{font-size:24px;display:block;margin-bottom:6px}
+
+/* Practice topic */
+.topic-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem;margin-bottom:10px}
+.topic-label{font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.topic-text{font-size:15px;font-weight:500;color:var(--text);line-height:1.5;margin-bottom:8px}
+.topic-hint{font-size:13px;color:var(--text-2);line-height:1.6}
+.use-topic-btn{font-size:12px;color:var(--pink);background:var(--pink-bg);border:1px solid var(--pink-border);border-radius:20px;padding:4px 12px;cursor:pointer;margin-top:8px}
 </style>
 </head>
 <body>
 
 <header class="site-header">
-  <div style="display:flex;align-items:center;gap:12px">
-    <button id="header-back-btn" onclick="headerBack()" style="display:none;background:none;border:none;cursor:pointer;font-size:13px;color:var(--text-2);padding:0;align-items:center;gap:4px">
+  <div class="header-left">
+    <button class="header-back-btn" id="header-back-btn" onclick="headerBack()">
       <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 12L6 8l4-4"/></svg>
       返回
     </button>
@@ -196,37 +227,16 @@ textarea.essay-box:focus{border-color:var(--border-mid)}
     <div id="register-identity-pill" class="identity-pill"></div>
     <div class="form-title">建立你的帳號</div>
     <p class="form-sub">填完之後就可以開始批改囉！下次自動登入。</p>
-
-    <div class="field">
-      <label class="field-label">姓名</label>
-      <input type="text" id="reg-name" placeholder="你的名字">
-    </div>
-    <div class="field">
-      <label class="field-label">Gmail</label>
-      <input type="email" id="reg-email" placeholder="yourname@gmail.com">
-    </div>
-    <div class="field">
-      <label class="field-label">年級</label>
-      <select id="reg-grade">
-        <option value="">請選擇</option>
-      </select>
-    </div>
-    <div class="field">
-      <label class="field-label">學校 <span>（選填）</span></label>
-      <input type="text" id="reg-school" placeholder="就讀學校名稱">
-    </div>
-    <div class="field">
-      <label class="field-label">最想加強的科目</label>
-      <select id="reg-subject">
-        <option value="">請選擇</option>
-      </select>
-    </div>
+    <div class="field"><label class="field-label">姓名</label><input type="text" id="reg-name" placeholder="你的名字"></div>
+    <div class="field"><label class="field-label">Gmail</label><input type="email" id="reg-email" placeholder="yourname@gmail.com"></div>
+    <div class="field"><label class="field-label">年級</label><select id="reg-grade"><option value="">請選擇</option></select></div>
+    <div class="field"><label class="field-label">學校 <span>（選填）</span></label><input type="text" id="reg-school" placeholder="就讀學校名稱"></div>
+    <div class="field"><label class="field-label">最想加強的科目</label><select id="reg-subject"><option value="">請選擇</option></select></div>
     <div class="field">
       <label class="field-label">Groq API Key <span>（免費）</span></label>
       <input type="password" id="reg-apikey" placeholder="gsk_...">
       <div class="api-hint">免費申請：<a href="https://console.groq.com/keys" target="_blank">console.groq.com/keys</a>（不需信用卡）</div>
     </div>
-
     <button class="register-btn" onclick="doRegister()">開始使用 批批 PiPi AI 🎉</button>
     <div class="err-box" id="reg-err" style="margin-top:12px"></div>
   </div>
@@ -237,10 +247,8 @@ textarea.essay-box:focus{border-color:var(--border-mid)}
   <main>
     <div class="home-greeting" id="home-greeting"></div>
     <p class="home-sub" id="home-sub"></p>
-
     <div class="section-label">選擇批改題型</div>
     <div class="type-grid" id="type-grid"></div>
-
     <div class="section-label">批改歷史紀錄</div>
     <div class="history-section">
       <div id="history-list"><div class="history-empty">還沒有批改紀錄，快去批改你的第一篇作文吧！</div></div>
@@ -258,72 +266,114 @@ textarea.essay-box:focus{border-color:var(--border-mid)}
     <div class="grade-title" id="grade-title"></div>
     <div class="grade-desc" id="grade-desc"></div>
 
-    <div id="sub-toggle-wrap" style="display:none" class="grade-field">
-      <div class="sub-toggle">
-        <button class="sub-btn active" id="chi-btn-zx" onclick="setChiMode('zx')">知性題</button>
-        <button class="sub-btn" id="chi-btn-qy" onclick="setChiMode('qy')">情意題</button>
+    <!-- 國寫知性/情意切換 -->
+    <div id="chi-mode-wrap" style="display:none" class="grade-field">
+      <div style="display:flex;gap:8px">
+        <button class="tab-btn active" id="chi-btn-zx" onclick="setChiMode('zx')" style="flex:none;padding:6px 16px;border:1px solid var(--border);border-radius:20px">知性題</button>
+        <button class="tab-btn" id="chi-btn-qy" onclick="setChiMode('qy')" style="flex:none;padding:6px 16px;border:1px solid var(--border);border-radius:20px">情意題</button>
       </div>
     </div>
 
+    <!-- 題目欄 -->
     <div id="title-field" class="grade-field" style="display:none">
       <label class="field-label-sm" id="title-label">作文題目（選填）</label>
       <input type="text" id="title-input" placeholder="">
     </div>
 
-    <div class="grade-field">
-      <label class="field-label-sm" id="textarea-label">貼上內容</label>
+    <!-- 輸入方式切換 -->
+    <div class="tab-row">
+      <button class="tab-btn active" id="tab-text" onclick="switchInputTab('text')">✏️ 貼上文字</button>
+      <button class="tab-btn" id="tab-img" onclick="switchInputTab('img')">📷 上傳圖片</button>
+    </div>
+
+    <!-- 文字輸入 -->
+    <div id="input-text-area" class="grade-field">
+      <label class="field-label-sm">貼上內容</label>
       <textarea class="essay-box" id="main-textarea" placeholder="在這裡貼上作文..."></textarea>
-      <div class="wc-row">
-        <span id="wc-display">0 字</span>
-        <span id="wc-hint"></span>
+      <div class="wc-row"><span id="wc-display">0 字</span><span id="wc-hint"></span></div>
+    </div>
+
+    <!-- 圖片上傳 -->
+    <div id="input-img-area" style="display:none" class="grade-field">
+      <div class="drop-zone" id="drop-zone"
+        onclick="document.getElementById('file-input').click()"
+        ondragover="event.preventDefault();this.classList.add('drag')"
+        ondragleave="this.classList.remove('drag')"
+        ondrop="handleDrop(event)">
+        <span class="drop-icon">🖼️</span>
+        <div class="drop-title">點擊或拖曳圖片上傳</div>
+        <div class="drop-sub">可直接拍作文稿紙・支援 JPG / PNG / HEIC</div>
+      </div>
+      <input type="file" id="file-input" accept="image/*" style="display:none" onchange="handleFile(this.files[0])">
+      <div id="preview-wrap" style="display:none">
+        <img id="preview-img" class="preview-img" alt="作文圖片">
+        <button class="remove-btn" onclick="clearImg()">移除圖片</button>
       </div>
     </div>
 
     <button class="submit-btn" id="grade-btn" onclick="doGrade()">✨ 開始批改</button>
-    <div class="loading" id="grade-loading">
-      <div style="margin-bottom:12px">批批老師批改中，請稍候</div>
-      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-    </div>
+    <div class="loading" id="grade-loading"><div style="margin-bottom:12px">批批老師批改中，請稍候</div><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
     <div class="err-box" id="grade-err"></div>
     <div class="result-area" id="grade-result"></div>
+  </main>
+</div>
+
+<!-- AI 練習題目頁 -->
+<div id="page-practice" class="page">
+  <main>
+    <button class="back-btn" onclick="goTo('home')">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 12L6 8l4-4"/></svg>
+      返回首頁
+    </button>
+    <div style="font-family:var(--font-serif);font-size:22px;font-weight:700;margin-bottom:4px">AI 練習題目</div>
+    <div style="font-size:13px;color:var(--text-2);margin-bottom:1.25rem">根據近十年歷屆試題趨勢，AI 幫你預測可能出現的題目</div>
+    <div style="display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap" id="practice-type-tabs"></div>
+    <button class="submit-btn" style="margin-top:0;margin-bottom:1.25rem" onclick="genTopics()">🎲 生成練習題目</button>
+    <div class="loading" id="practice-loading"><div style="margin-bottom:12px">AI 分析歷屆趨勢中...</div><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+    <div id="practice-result"></div>
+    <div class="err-box" id="practice-err"></div>
+  </main>
+</div>
+
+<!-- 弱點分析頁 -->
+<div id="page-weakness" class="page">
+  <main>
+    <button class="back-btn" onclick="goTo('home')">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 12L6 8l4-4"/></svg>
+      返回首頁
+    </button>
+    <div style="font-family:var(--font-serif);font-size:22px;font-weight:700;margin-bottom:4px">個人弱點分析</div>
+    <div style="font-size:13px;color:var(--text-2);margin-bottom:1.25rem">根據你的批改歷史，找出弱點並提供補強建議</div>
+    <div id="weakness-content"></div>
+    <div class="loading" id="weakness-loading"><div style="margin-bottom:12px">分析你的弱點中...</div><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+    <div class="err-box" id="weakness-err"></div>
   </main>
 </div>
 
 <script>
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyZVlDA4RgFXtQmFMo301SjCrQiS8Y4TFtCkrrODtihB0RqyMtI0tksTiAl-nil1fCdGA/exec';
 
-let currentType = '', chiMode = 'zx';
+let currentType = '', chiMode = 'zx', inputTab = 'text';
+let imgB64 = null, imgMime = 'image/jpeg';
 let user = null;
+let practiceType = '';
 
 // ── Init ──
 window.onload = function() {
   const saved = localStorage.getItem('pipi_user');
-  if (saved) {
-    user = JSON.parse(saved);
-    showHome();
-  } else {
-    goTo('welcome');
-  }
+  if (saved) { user = JSON.parse(saved); showHome(); }
+  else goTo('welcome');
+  document.getElementById('main-textarea').addEventListener('input', updateWC);
 };
-
-function updateHeaderBack(page) {
-  const btn = document.getElementById('header-back-btn');
-  if (page === 'register') {
-    btn.style.display = 'inline-flex';
-  } else {
-    btn.style.display = 'none';
-  }
-}
-
-function headerBack() {
-  goTo('welcome');
-}
 
 function goTo(page) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + page).classList.add('active');
-  updateHeaderBack(page);
+  const backBtn = document.getElementById('header-back-btn');
+  backBtn.className = 'header-back-btn' + (page === 'register' ? ' show' : '');
 }
+
+function headerBack() { goTo('welcome'); }
 
 function logout() {
   localStorage.removeItem('pipi_user');
@@ -335,14 +385,11 @@ function logout() {
 
 // ── Welcome ──
 function selectIdentity(identity) {
-  const pill = document.getElementById('register-identity-pill');
-  pill.textContent = identity === 'junior' ? '📚 國中生' : '🎓 高中生';
-
+  document.getElementById('register-identity-pill').textContent = identity === 'junior' ? '📚 國中生' : '🎓 高中生';
   const gradeSelect = document.getElementById('reg-grade');
   const subjectSelect = document.getElementById('reg-subject');
   gradeSelect.innerHTML = '<option value="">請選擇</option>';
   subjectSelect.innerHTML = '<option value="">請選擇</option>';
-
   if (identity === 'junior') {
     ['國一','國二','國三'].forEach(g => gradeSelect.innerHTML += `<option>${g}</option>`);
     ['會考國文作文'].forEach(s => subjectSelect.innerHTML += `<option>${s}</option>`);
@@ -350,7 +397,6 @@ function selectIdentity(identity) {
     ['高一','高二','高三'].forEach(g => gradeSelect.innerHTML += `<option>${g}</option>`);
     ['學測英文作文','學測國文國寫','學測中譯英','全部都要加強'].forEach(s => subjectSelect.innerHTML += `<option>${s}</option>`);
   }
-
   localStorage.setItem('pipi_pending_identity', identity);
   goTo('register');
 }
@@ -366,30 +412,17 @@ async function doRegister() {
   const identity = localStorage.getItem('pipi_pending_identity') || 'senior';
   const errDiv = document.getElementById('reg-err');
   errDiv.style.display = 'none';
-
-  if (!name) { errDiv.textContent = '請填寫姓名'; errDiv.style.display = 'block'; return; }
-  if (!email || !email.includes('@')) { errDiv.textContent = '請填寫正確的 Gmail'; errDiv.style.display = 'block'; return; }
-  if (!grade) { errDiv.textContent = '請選擇年級'; errDiv.style.display = 'block'; return; }
-  if (!subject) { errDiv.textContent = '請選擇想加強的科目'; errDiv.style.display = 'block'; return; }
-  if (!apikey || !apikey.startsWith('gsk_')) { errDiv.textContent = '請填寫正確的 Groq API Key（以 gsk_ 開頭）'; errDiv.style.display = 'block'; return; }
-
+  if (!name) { errDiv.textContent='請填寫姓名'; errDiv.style.display='block'; return; }
+  if (!email||!email.includes('@')) { errDiv.textContent='請填寫正確的 Gmail'; errDiv.style.display='block'; return; }
+  if (!grade) { errDiv.textContent='請選擇年級'; errDiv.style.display='block'; return; }
+  if (!subject) { errDiv.textContent='請選擇想加強的科目'; errDiv.style.display='block'; return; }
+  if (!apikey||!apikey.startsWith('gsk_')) { errDiv.textContent='請填寫正確的 Groq API Key（以 gsk_ 開頭）'; errDiv.style.display='block'; return; }
   user = { name, email, grade, school, subject, apikey, identity };
   localStorage.setItem('pipi_user', JSON.stringify(user));
-
-  // 送資料到 Google 試算表（用 GET 繞過 CORS）
   try {
-    const params = new URLSearchParams({
-      name,
-      email,
-      identity: identity === 'junior' ? '國中生' : '高中生',
-      grade,
-      school: school || '（未填）',
-      subject,
-      timestamp: new Date().toLocaleString('zh-TW')
-    });
+    const params = new URLSearchParams({ name, email, identity: identity==='junior'?'國中生':'高中生', grade, school: school||'（未填）', subject, timestamp: new Date().toLocaleString('zh-TW') });
     await fetch(SHEET_URL + '?' + params.toString());
-  } catch(e) { /* 靜默失敗，不影響使用 */ }
-
+  } catch(e) {}
   showHome();
 }
 
@@ -399,24 +432,19 @@ function showHome() {
   document.getElementById('user-badge').textContent = user.name;
   document.getElementById('user-badge').style.display = 'inline-flex';
   document.getElementById('logout-btn').style.display = 'inline';
-
   document.getElementById('home-greeting').textContent = `嗨，${user.name} 👋`;
-  document.getElementById('home-sub').textContent = user.identity === 'junior'
-    ? '選擇題型，開始讓批批老師幫你批改作文！'
-    : '選擇題型，開始讓批批老師幫你批改作文！';
-
+  document.getElementById('home-sub').textContent = '選擇題型，開始讓批批老師幫你批改作文！';
   const grid = document.getElementById('type-grid');
   grid.innerHTML = '';
-
   const juniorTypes = [
     { id:'bcap-chi', tag:'tag-red', tagText:'會考', name:'國文作文', desc:'立意・組織・遣詞・格式標點', score:'滿分 6 級分' }
   ];
   const seniorTypes = [
-    { id:'gsat-eng', tag:'tag-blue', tagText:'學測', name:'英文作文', desc:'內容・組織・文法句構<br>字彙拼字・體例', score:'滿分 20 分・五項評分' },
-    { id:'gsat-chi', tag:'tag-green', tagText:'學測', name:'國文國寫', desc:'知性題或情意題<br>六級分制評分', score:'滿分 25 分・A+/A/B+/B/C+/C' },
+    { id:'gsat-eng', tag:'tag-blue', tagText:'學測', name:'英文作文', desc:'內容・組織・文法句構<br>字彙拼字・體例', score:'滿分 20 分' },
+    { id:'gsat-chi-zx', tag:'tag-green', tagText:'學測', name:'國寫・知性題', desc:'論點明確・詮釋深入<br>結構嚴謹・文辭暢達', score:'滿分 25 分・A+/A/B+/B/C+/C' },
+    { id:'gsat-chi-qy', tag:'tag-pink', tagText:'學測', name:'國寫・情意題', desc:'情感深刻・具體書寫<br>結構嚴謹・文辭洗練', score:'滿分 25 分・A+/A/B+/B/C+/C' },
     { id:'gsat-trans', tag:'tag-amber', tagText:'學測', name:'中譯英', desc:'逐句評分<br>每個錯誤扣 0.5 分', score:'每題 4 分・共 8 分' }
   ];
-
   const types = user.identity === 'junior' ? juniorTypes : seniorTypes;
   types.forEach(t => {
     grid.innerHTML += `<button class="type-card" onclick="goToGrade('${t.id}')">
@@ -426,19 +454,28 @@ function showHome() {
       <div class="type-score">${t.score}</div>
     </button>`;
   });
-
+  // AI 練習題目 & 弱點分析卡片
+  grid.innerHTML += `<button class="type-card" onclick="goToPractice()">
+    <span class="type-tag tag-purple">AI</span>
+    <div class="type-name">練習題目</div>
+    <div class="type-desc">近十年歷屆趨勢<br>AI 預測可能題目</div>
+    <div class="type-score">隨機生成・無限練習</div>
+  </button>`;
+  grid.innerHTML += `<button class="type-card" onclick="goToWeakness()">
+    <span class="type-tag tag-amber">分析</span>
+    <div class="type-name">弱點分析</div>
+    <div class="type-desc">根據批改紀錄<br>找出你的弱項</div>
+    <div class="type-score">每個題型需 3 次批改解鎖</div>
+  </button>`;
   renderHistory();
   goTo('home');
 }
 
 // ── History ──
-function getHistory() {
-  return JSON.parse(localStorage.getItem('pipi_history') || '[]');
-}
+function getHistory() { return JSON.parse(localStorage.getItem('pipi_history') || '[]'); }
 function saveHistory(item) {
-  const h = getHistory();
-  h.unshift(item);
-  if (h.length > 20) h.pop();
+  const h = getHistory(); h.unshift(item);
+  if (h.length > 30) h.pop();
   localStorage.setItem('pipi_history', JSON.stringify(h));
 }
 function renderHistory() {
@@ -446,195 +483,355 @@ function renderHistory() {
   const el = document.getElementById('history-list');
   if (!h.length) { el.innerHTML = '<div class="history-empty">還沒有批改紀錄，快去批改你的第一篇作文吧！</div>'; return; }
   el.innerHTML = h.map((item, i) => `
-    <div class="history-item" onclick="showHistoryResult(${i})">
-      <div>
-        <div class="history-title">${item.label}</div>
-        <div class="history-meta">${item.date}・${item.preview}</div>
+    <div class="history-item">
+      <div class="history-header" onclick="toggleHistory(${i})">
+        <div>
+          <div class="history-title">${item.label}</div>
+          <div class="history-meta">${item.date}</div>
+        </div>
+        <div class="history-score">${item.scoreText}</div>
       </div>
-      <div class="history-score">${item.scoreText}</div>
+      <div class="history-body" id="history-body-${i}">
+        ${buildResultHTML(item.type, item.data)}
+      </div>
     </div>`).join('');
 }
-function showHistoryResult(i) {
-  const h = getHistory();
-  const item = h[i];
-  currentType = item.type;
-  goToGrade(item.type, true);
-  setTimeout(() => {
-    const result = document.getElementById('grade-result');
-    renderResult(item.type, item.data, result);
-  }, 100);
+function toggleHistory(i) {
+  const body = document.getElementById('history-body-' + i);
+  body.classList.toggle('open');
 }
 
 // ── Grade page ──
 const typeCfg = {
-  'gsat-eng':{ title:'英文作文', desc:'內容 5 + 組織 5 + 文法句構 4 + 字彙拼字 4 + 體例 2 = 20 分', showSub:false, showTitle:true, titleLabel:'作文題目或提示（選填）', titlePH:'e.g. Write about a challenge you overcame', textPH:'Paste your English essay here...', wcTarget:120, wcUnit:'words' },
-  'gsat-chi':{ title:'國文國寫', desc:'知性題或情意題，六級分制（A+ 到 C），滿分 25 分', showSub:true, showTitle:true, titleLabel:'題目或題幹（建議填寫）', titlePH:'例：說明對「標籤」現象的看法', textPH:'在這裡貼上國寫作文...', wcTarget:0, wcUnit:'字' },
-  'gsat-trans':{ title:'中譯英', desc:'每題 4 分，每個錯誤扣 0.5 分，共 8 分', showSub:false, showTitle:false, textPH:'格式：\n第一句中文\n第一句英文翻譯\n\n第二句中文\n第二句英文翻譯', wcTarget:0, wcUnit:'字' },
-  'bcap-chi':{ title:'國文作文（會考）', desc:'六級分制：立意取材・組織結構・遣詞造句・格式標點', showSub:false, showTitle:true, titleLabel:'作文題目（選填）', titlePH:'例：在那段與眾不同的日子裡', textPH:'在這裡貼上作文...', wcTarget:0, wcUnit:'字' }
+  'gsat-eng':{ title:'英文作文', desc:'內容 5 + 組織 5 + 文法句構 4 + 字彙拼字 4 + 體例 2 = 20 分', showTitle:true, titleLabel:'作文題目或提示（選填）', titlePH:'e.g. Write about a challenge you overcame', textPH:'Paste your English essay here...', wcTarget:120, wcUnit:'words', showChi:false },
+  'gsat-chi-zx':{ title:'國寫・知性題', desc:'論點明確、詮釋深入、結構嚴謹、文辭暢達，滿分 25 分', showTitle:true, titleLabel:'題目或題幹（建議填寫）', titlePH:'例：說明對「標籤」現象的看法', textPH:'在這裡貼上知性題作文...', wcTarget:0, wcUnit:'字', showChi:false },
+  'gsat-chi-qy':{ title:'國寫・情意題', desc:'情感深刻、具體書寫獨特感思、文辭洗練，滿分 25 分', showTitle:true, titleLabel:'題目或題幹（建議填寫）', titlePH:'例：那些年，我與書的故事', textPH:'在這裡貼上情意題作文...', wcTarget:0, wcUnit:'字', showChi:false },
+  'gsat-trans':{ title:'中譯英', desc:'每題 4 分，每個錯誤扣 0.5 分，共 8 分', showTitle:false, textPH:'格式：\n第一句中文\n第一句英文翻譯\n\n第二句中文\n第二句英文翻譯', wcTarget:0, wcUnit:'字', showChi:false },
+  'bcap-chi':{ title:'國文作文（會考）', desc:'六級分制：立意取材・組織結構・遣詞造句・格式標點', showTitle:true, titleLabel:'作文題目（選填）', titlePH:'例：在那段與眾不同的日子裡', textPH:'在這裡貼上作文...', wcTarget:0, wcUnit:'字', showChi:false }
 };
 
-function goToGrade(type, skipReset) {
+function goToGrade(type) {
   currentType = type;
   const c = typeCfg[type];
   document.getElementById('grade-title').textContent = c.title;
   document.getElementById('grade-desc').textContent = c.desc;
-  document.getElementById('sub-toggle-wrap').style.display = c.showSub ? 'block' : 'none';
+  document.getElementById('chi-mode-wrap').style.display = 'none';
   const tf = document.getElementById('title-field');
   tf.style.display = c.showTitle ? 'block' : 'none';
-  if (c.showTitle) { document.getElementById('title-label').textContent = c.titleLabel; document.getElementById('title-input').placeholder = c.titlePH; }
+  if (c.showTitle) { document.getElementById('title-label').textContent = c.titleLabel; document.getElementById('title-input').placeholder = c.titlePH; document.getElementById('title-input').value = ''; }
   document.getElementById('main-textarea').placeholder = c.textPH;
-  if (!skipReset) {
-    document.getElementById('main-textarea').value = '';
-    document.getElementById('title-input') && (document.getElementById('title-input').value = '');
-    document.getElementById('grade-result').style.display = 'none';
-    document.getElementById('grade-err').style.display = 'none';
-    document.getElementById('wc-display').textContent = '0 ' + (c.wcUnit==='words'?'words':'字');
-    document.getElementById('wc-hint').textContent = '';
-  }
-  chiMode = 'zx';
-  if (document.getElementById('chi-btn-zx')) {
-    document.getElementById('chi-btn-zx').className = 'sub-btn active';
-    document.getElementById('chi-btn-qy').className = 'sub-btn';
-  }
+  document.getElementById('main-textarea').value = '';
+  document.getElementById('grade-result').style.display = 'none';
+  document.getElementById('grade-err').style.display = 'none';
+  document.getElementById('wc-display').textContent = '0 ' + (c.wcUnit==='words'?'words':'字');
+  document.getElementById('wc-hint').textContent = '';
+  clearImg(); switchInputTab('text');
   goTo('grade');
+}
+
+function switchInputTab(t) {
+  inputTab = t;
+  ['text','img'].forEach(x => {
+    document.getElementById('tab-'+x).className = 'tab-btn'+(t===x?' active':'');
+    document.getElementById('input-'+x+'-area').style.display = t===x?'block':'none';
+  });
 }
 
 function setChiMode(m) {
   chiMode = m;
-  ['zx','qy'].forEach(x => { document.getElementById('chi-btn-'+x).className = 'sub-btn'+(m===x?' active':''); });
+  ['zx','qy'].forEach(x => { document.getElementById('chi-btn-'+x).className = 'tab-btn'+(m===x?' active':''); });
 }
 
-// Word count
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('main-textarea').addEventListener('input', function() {
-    const c = typeCfg[currentType];
-    if (!c) return;
-    let count, display;
-    if (c.wcUnit === 'words') {
-      count = this.value.trim().split(/\s+/).filter(w => w.length > 0).length;
-      display = count + ' words';
-      const hint = document.getElementById('wc-hint');
-      if (c.wcTarget && count < c.wcTarget) {
-        hint.textContent = `建議至少 ${c.wcTarget} 字`;
-        hint.className = 'wc-warn';
-      } else {
-        hint.textContent = count >= c.wcTarget ? '✓ 字數達標' : '';
-        hint.className = '';
-      }
-    } else {
-      count = this.value.replace(/\s/g,'').length;
-      display = count + ' 字';
-    }
-    document.getElementById('wc-display').textContent = display;
-  });
-});
+function updateWC() {
+  const c = typeCfg[currentType]; if (!c) return;
+  const val = document.getElementById('main-textarea').value;
+  let display;
+  if (c.wcUnit === 'words') {
+    const count = val.trim().split(/\s+/).filter(w=>w.length>0).length;
+    display = count + ' words';
+    const hint = document.getElementById('wc-hint');
+    if (c.wcTarget && count < c.wcTarget) { hint.textContent=`建議至少 ${c.wcTarget} 字`; hint.className='wc-warn'; }
+    else { hint.textContent=count>=c.wcTarget?'✓ 字數達標':''; hint.className=''; }
+  } else {
+    display = val.replace(/\s/g,'').length + ' 字';
+  }
+  document.getElementById('wc-display').textContent = display;
+}
+
+function handleDrop(e) { e.preventDefault(); document.getElementById('drop-zone').classList.remove('drag'); const f=e.dataTransfer.files[0]; if(f&&f.type.startsWith('image/')) handleFile(f); }
+function handleFile(f) { if(!f) return; imgMime=f.type||'image/jpeg'; const r=new FileReader(); r.onload=e=>{ imgB64=e.target.result.split(',')[1]; document.getElementById('preview-img').src=e.target.result; document.getElementById('preview-wrap').style.display='block'; document.getElementById('drop-zone').style.display='none'; }; r.readAsDataURL(f); }
+function clearImg() { imgB64=null; document.getElementById('preview-wrap').style.display='none'; document.getElementById('drop-zone').style.display='block'; document.getElementById('file-input').value=''; }
 
 // ── System prompts ──
-const systemPrompts = {
-  'gsat-eng': `你是台灣學測英文作文閱卷委員，依照大考中心官方評分標準批改。請只輸出純JSON，不要任何markdown：
-{"total":數字,"grade_label":"特優/優/可/差/劣","items":[{"name":"內容 Content","score":數字,"max":5,"comment":"繁體中文評語"},{"name":"組織 Organization","score":數字,"max":5,"comment":"繁體中文評語"},{"name":"文法與句構 Grammar","score":數字,"max":4,"comment":"繁體中文評語"},{"name":"字彙與拼字 Vocabulary","score":數字,"max":4,"comment":"繁體中文評語"},{"name":"體例 Mechanics","score":數字,"max":2,"comment":"繁體中文評語"}],"overall":"整體評語2-3句","suggestions":["建議1","建議2","建議3"],"rewrite":"【改寫範例】選最需改善的一段提供改寫"}`,
-  'gsat-chi-zx': `你是台灣學測國寫閱卷委員批改知性題（滿分25分，A+19-21/A15-18/B+12-14/B8-11/C+5-7/C1-4）。只輸出純JSON：
-{"score":數字,"grade":"A+/A/B+/B/C+/C","overall":"整體評語","strengths":["優點1","優點2"],"weaknesses":["缺點1","缺點2"],"suggestions":["建議1","建議2","建議3"],"rewrite":"【改寫範例】"}`,
-  'gsat-chi-qy': `你是台灣學測國寫閱卷委員批改情意題（滿分25分，A+22-25/A18-21/B+14-17/B10-13/C+6-9/C1-5）。只輸出純JSON：
-{"score":數字,"grade":"A+/A/B+/B/C+/C","overall":"整體評語","strengths":["優點1","優點2"],"weaknesses":["缺點1","缺點2"],"suggestions":["建議1","建議2","建議3"],"rewrite":"【改寫範例】"}`,
-  'gsat-trans': `你是台灣學測中譯英閱卷委員（每題4分，每錯扣0.5分）。只輸出純JSON：
-{"s1":{"score":數字,"errors":["錯誤說明"],"reference":"較佳譯法","comment":"評語"},"s2":{"score":數字,"errors":["錯誤說明"],"reference":"較佳譯法","comment":"評語"},"total":數字,"overall":"整體建議"}`,
-  'bcap-chi': `你是台灣國中教育會考寫作測驗閱卷委員（六級分制）。只輸出純JSON：
-{"score":數字,"label":"X級分","dims":[{"name":"立意取材","comment":"評語"},{"name":"組織結構","comment":"評語"},{"name":"遣詞造句","comment":"評語"},{"name":"格式標點","comment":"評語"}],"overall":"整體評語","suggestions":["建議1","建議2","建議3"],"rewrite":"【改寫範例】"}`
-};
+function getSystemPrompt(type) {
+  const p = {
+    'gsat-eng': `你是台灣學測英文作文閱卷委員，依照大考中心官方評分標準批改。只輸出純JSON：{"total":數字,"grade_label":"特優/優/可/差/劣","items":[{"name":"內容 Content","score":數字,"max":5,"comment":"繁中評語"},{"name":"組織 Organization","score":數字,"max":5,"comment":"繁中評語"},{"name":"文法與句構 Grammar","score":數字,"max":4,"comment":"繁中評語"},{"name":"字彙與拼字 Vocabulary","score":數字,"max":4,"comment":"繁中評語"},{"name":"體例 Mechanics","score":數字,"max":2,"comment":"繁中評語"}],"overall":"整體評語2-3句","suggestions":["建議1","建議2","建議3"],"rewrite":"【改寫範例】"}`,
+    'gsat-chi-zx': `你是台灣學測國寫閱卷委員批改知性題（滿分25分，A+19-21/A15-18/B+12-14/B8-11/C+5-7/C1-4）。只輸出純JSON：{"score":數字,"grade":"A+/A/B+/B/C+/C","overall":"整體評語","strengths":["優點1","優點2"],"weaknesses":["缺點1","缺點2"],"suggestions":["建議1","建議2","建議3"],"rewrite":"【改寫範例】"}`,
+    'gsat-chi-qy': `你是台灣學測國寫閱卷委員批改情意題（滿分25分，A+22-25/A18-21/B+14-17/B10-13/C+6-9/C1-5）。只輸出純JSON：{"score":數字,"grade":"A+/A/B+/B/C+/C","overall":"整體評語","strengths":["優點1","優點2"],"weaknesses":["缺點1","缺點2"],"suggestions":["建議1","建議2","建議3"],"rewrite":"【改寫範例】"}`,
+    'gsat-trans': `你是台灣學測中譯英閱卷委員（每題4分，每錯扣0.5分）。只輸出純JSON：{"s1":{"score":數字,"errors":["錯誤說明"],"reference":"較佳譯法","comment":"評語"},"s2":{"score":數字,"errors":["錯誤說明"],"reference":"較佳譯法","comment":"評語"},"total":數字,"overall":"整體建議"}`,
+    'bcap-chi': `你是台灣國中教育會考寫作測驗閱卷委員（六級分制）。只輸出純JSON：{"score":數字,"label":"X級分","dims":[{"name":"立意取材","comment":"評語"},{"name":"組織結構","comment":"評語"},{"name":"遣詞造句","comment":"評語"},{"name":"格式標點","comment":"評語"}],"overall":"整體評語","suggestions":["建議1","建議2","建議3"],"rewrite":"【改寫範例】"}`
+  };
+  return p[type];
+}
 
 async function doGrade() {
   const errDiv = document.getElementById('grade-err');
   const loading = document.getElementById('grade-loading');
   const result = document.getElementById('grade-result');
   errDiv.style.display='none'; result.style.display='none';
-
+  const hasImg = inputTab==='img' && imgB64;
   const textVal = document.getElementById('main-textarea').value.trim();
-  if (textVal.length < 15) { errDiv.textContent='請貼上至少 15 字的內容再批改'; errDiv.style.display='block'; return; }
-
+  if (!hasImg && textVal.length < 15) { errDiv.textContent='請貼上至少 15 字的內容再批改'; errDiv.style.display='block'; return; }
+  if (inputTab==='img' && !imgB64) { errDiv.textContent='請先上傳圖片'; errDiv.style.display='block'; return; }
   const btn = document.getElementById('grade-btn');
   btn.disabled=true; loading.style.display='block';
-
   const titleVal = document.getElementById('title-input') ? document.getElementById('title-input').value.trim() : '';
-  const schemaKey = currentType==='gsat-chi' ? `gsat-chi-${chiMode}` : currentType;
-  const systemPrompt = systemPrompts[schemaKey];
-  const userContent = (titleVal ? `題目/提示：${titleVal}\n\n` : '') + `作文內容：\n${textVal}`;
+  const systemPrompt = getSystemPrompt(currentType);
+  const userText = (titleVal?`題目：${titleVal}\n\n`:'') + (hasImg?'請讀取圖片中的作文內容並批改。':'作文內容：\n'+textVal);
 
   try {
-    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: { 'Content-Type':'application/json', 'Authorization':`Bearer ${user.apikey}` },
-      body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
-        temperature: 0.3,
-        max_tokens: 1024,
-        response_format: { type:'json_object' },
-        messages: [{ role:'system', content:systemPrompt }, { role:'user', content:userContent }]
-      })
-    });
-    const data = await res.json();
-    if (data.error) { errDiv.textContent='API 錯誤：'+data.error.message; errDiv.style.display='block'; return; }
-    const raw = data.choices?.[0]?.message?.content || '';
-    const parsed = JSON.parse(raw.replace(/```json|```/g,'').trim());
+    let parsed;
+    if (hasImg) {
+      // 圖片用 Claude API
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          model:'claude-sonnet-4-20250514', max_tokens:1024,
+          system: systemPrompt,
+          messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:imgMime,data:imgB64}},{type:'text',text:userText}]}]
+        })
+      });
+      const data = await res.json();
+      if(data.error){errDiv.textContent='圖片批改錯誤：'+data.error.message;errDiv.style.display='block';return;}
+      const raw = data.content.map(b=>b.text||'').join('');
+      parsed = JSON.parse(raw.replace(/```json|```/g,'').trim());
+    } else {
+      // 文字用 Groq
+      const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method:'POST',
+        headers:{'Content-Type':'application/json','Authorization':`Bearer ${user.apikey}`},
+        body:JSON.stringify({ model:'llama-3.3-70b-versatile', temperature:0.3, max_tokens:1024, response_format:{type:'json_object'}, messages:[{role:'system',content:systemPrompt},{role:'user',content:userText}] })
+      });
+      const data = await res.json();
+      if(data.error){errDiv.textContent='API 錯誤：'+data.error.message;errDiv.style.display='block';return;}
+      parsed = JSON.parse(data.choices?.[0]?.message?.content||'{}');
+    }
 
-    // 儲存歷史
-    const scoreText = currentType==='gsat-eng' ? `${parsed.total}/20` : currentType==='gsat-chi' ? `${parsed.score}/25 ${parsed.grade}` : currentType==='gsat-trans' ? `${parsed.total}/8` : `${parsed.score}級分`;
-    const label = typeCfg[currentType].title + (titleVal ? `・${titleVal}` : '');
-    const preview = textVal.substring(0, 20) + '...';
+    const scoreText = getScoreText(currentType, parsed);
+    const label = typeCfg[currentType].title + (titleVal?`・${titleVal}`:'');
     const date = new Date().toLocaleDateString('zh-TW');
-    saveHistory({ type:currentType, label, preview, date, scoreText, data:parsed });
+    saveHistory({ type:currentType, label, date, scoreText, data:parsed });
     renderHistory();
-
     renderResult(currentType, parsed, result);
   } catch(e) {
-    errDiv.textContent='批改時發生錯誤，請確認 API Key 是否正確。';
+    errDiv.textContent='批改時發生錯誤：'+e.message;
     errDiv.style.display='block';
-  } finally {
-    btn.disabled=false; loading.style.display='none';
-  }
+  } finally { btn.disabled=false; loading.style.display='none'; }
+}
+
+function getScoreText(type, r) {
+  if(type==='gsat-eng') return `${r.total}/20 ${r.grade_label}`;
+  if(type==='gsat-chi-zx'||type==='gsat-chi-qy') return `${r.score}/25 ${r.grade}`;
+  if(type==='gsat-trans') return `${r.total}/8`;
+  if(type==='bcap-chi') return `${r.score}級分`;
+  return '';
 }
 
 // ── Render ──
-function rcard(title, body) { return `<div class="rcard"><div class="rcard-title">${title}</div>${body}</div>`; }
-function barRow(name, score, max, comment) {
-  const p = Math.round(score/max*100);
-  return `<div class="bar-wrap"><div class="bar-top"><span>${name}</span><span>${score}/${max}</span></div><div class="bar-track"><div class="bar-fill" style="width:${p}%"></div></div>${comment?`<div class="bar-note">${comment}</div>`:''}</div>`;
+function rcard(title,body){return`<div class="rcard"><div class="rcard-title">${title}</div>${body}</div>`;}
+function barRow(name,score,max,comment){const p=Math.round(score/max*100);return`<div class="bar-wrap"><div class="bar-top"><span>${name}</span><span>${score}/${max}</span></div><div class="bar-track"><div class="bar-fill" style="width:${p}%"></div></div>${comment?`<div class="bar-note">${comment}</div>`:''}</div>`;}
+function suggList(arr){return(arr||[]).map((s,i)=>`<div class="sugg-item"><span class="sugg-n">${i+1}</span><span>${s}</span></div>`).join('');}
+
+function buildResultHTML(type, r) {
+  let h = '';
+  if(type==='gsat-eng'){
+    h+=`<div class="score-row"><div class="score-box"><div class="score-lbl">總分</div><div class="score-num">${r.total}<sub>/20</sub></div></div><div class="score-box"><div class="score-lbl">等級</div><div class="score-grade">${r.grade_label}</div></div></div>`;
+    h+=rcard('分項評分',r.items.map(it=>barRow(it.name,it.score,it.max,it.comment)).join(''));
+    h+=rcard('整體評語',`<p class="overall-p">${r.overall}</p>`);
+    h+=rcard('改善建議',suggList(r.suggestions));
+    h+=rcard('改寫範例',`<div class="rewrite-box">${r.rewrite}</div>`);
+  }
+  if(type==='gsat-chi-zx'||type==='gsat-chi-qy'){
+    h+=`<div class="score-row"><div class="score-box"><div class="score-lbl">分數</div><div class="score-num">${r.score}<sub>/25</sub></div></div><div class="score-box"><div class="score-lbl">等級</div><div class="score-grade">${r.grade}</div></div></div>`;
+    h+=rcard('整體評語',`<p class="overall-p">${r.overall}</p>`);
+    h+=rcard('優缺點分析',`<div class="sw-grid"><div><div class="sw-lbl pos">✓ 優點</div>${(r.strengths||[]).map(s=>`<div class="sw-item">${s}</div>`).join('')}</div><div><div class="sw-lbl neg">✗ 需改善</div>${(r.weaknesses||[]).map(s=>`<div class="sw-item">${s}</div>`).join('')}</div></div>`);
+    h+=rcard('改善建議',suggList(r.suggestions));
+    h+=rcard('改寫範例',`<div class="rewrite-box">${r.rewrite}</div>`);
+  }
+  if(type==='gsat-trans'){
+    const rs=(s,n)=>rcard(`第 ${n} 句・${s.score}/4 分`,`${s.errors&&s.errors.length?`<div class="err-list">${s.errors.join('<br>')}</div>`:`<div class="no-err">✓ 無明顯錯誤</div>`}<div class="ref-lbl">參考譯法</div><div class="ref-text">${s.reference}</div><div class="bar-note" style="margin-top:6px">${s.comment}</div>`);
+    h+=`<div class="score-box" style="margin-bottom:1rem;text-align:center"><div class="score-lbl">總分</div><div class="score-num">${r.total}<sub>/8</sub></div></div>`;
+    h+=rs(r.s1,1)+rs(r.s2,2);
+    h+=rcard('整體建議',`<p class="overall-p">${r.overall}</p>`);
+  }
+  if(type==='bcap-chi'){
+    const stars='●'.repeat(r.score)+'○'.repeat(Math.max(0,6-r.score));
+    h+=`<div class="score-row"><div class="score-box"><div class="score-lbl">級分</div><div class="score-num">${r.score}<sub>/6</sub></div><div class="stars">${stars}</div></div><div class="score-box"><div class="score-lbl">等第</div><div class="score-grade" style="font-size:20px;padding-top:6px">${r.label}</div></div></div>`;
+    h+=rcard('四面向評語',(r.dims||[]).map(d=>`<div class="dim-item"><div class="dim-name">${d.name}</div><div class="dim-comment">${d.comment}</div></div>`).join(''));
+    h+=rcard('整體評語',`<p class="overall-p">${r.overall}</p>`);
+    h+=rcard('改善建議',suggList(r.suggestions));
+    h+=rcard('改寫範例',`<div class="rewrite-box">${r.rewrite}</div>`);
+  }
+  return h;
 }
-function suggList(arr) { return (arr||[]).map((s,i)=>`<div class="sugg-item"><span class="sugg-n">${i+1}</span><span>${s}</span></div>`).join(''); }
 
 function renderResult(type, r, el) {
-  let h = '';
-  if (type==='gsat-eng') {
-    h += `<div class="score-row"><div class="score-box"><div class="score-lbl">總分</div><div class="score-num">${r.total}<sub>/20</sub></div></div><div class="score-box"><div class="score-lbl">等級</div><div class="score-grade">${r.grade_label}</div></div></div>`;
-    h += rcard('分項評分', r.items.map(it=>barRow(it.name,it.score,it.max,it.comment)).join(''));
-    h += rcard('整體評語', `<p class="overall-p">${r.overall}</p>`);
-    h += rcard('改善建議', suggList(r.suggestions));
-    h += rcard('改寫範例', `<div class="rewrite-box">${r.rewrite}</div>`);
-  }
-  if (type==='gsat-chi') {
-    h += `<div class="score-row"><div class="score-box"><div class="score-lbl">分數</div><div class="score-num">${r.score}<sub>/25</sub></div></div><div class="score-box"><div class="score-lbl">等級</div><div class="score-grade">${r.grade}</div></div></div>`;
-    h += rcard('整體評語', `<p class="overall-p">${r.overall}</p>`);
-    h += rcard('優缺點分析', `<div class="sw-grid"><div><div class="sw-lbl pos">✓ 優點</div>${(r.strengths||[]).map(s=>`<div class="sw-item">${s}</div>`).join('')}</div><div><div class="sw-lbl neg">✗ 需改善</div>${(r.weaknesses||[]).map(s=>`<div class="sw-item">${s}</div>`).join('')}</div></div>`);
-    h += rcard('改善建議', suggList(r.suggestions));
-    h += rcard('改寫範例', `<div class="rewrite-box">${r.rewrite}</div>`);
-  }
-  if (type==='gsat-trans') {
-    const rs = (s,n) => rcard(`第 ${n} 句・${s.score}/4 分`, `${s.errors&&s.errors.length?`<div class="err-list">${s.errors.join('<br>')}</div>`:`<div class="no-err">✓ 無明顯錯誤</div>`}<div class="ref-lbl">參考譯法</div><div class="ref-text">${s.reference}</div><div class="bar-note" style="margin-top:6px">${s.comment}</div>`);
-    h += `<div class="score-box" style="margin-bottom:1rem;text-align:center"><div class="score-lbl">總分</div><div class="score-num">${r.total}<sub>/8</sub></div></div>`;
-    h += rs(r.s1,1)+rs(r.s2,2);
-    h += rcard('整體建議', `<p class="overall-p">${r.overall}</p>`);
-  }
-  if (type==='bcap-chi') {
-    const stars = '●'.repeat(r.score)+'○'.repeat(Math.max(0,6-r.score));
-    h += `<div class="score-row"><div class="score-box"><div class="score-lbl">級分</div><div class="score-num">${r.score}<sub>/6</sub></div><div class="stars">${stars}</div></div><div class="score-box"><div class="score-lbl">等第</div><div class="score-grade" style="font-size:20px;padding-top:6px">${r.label}</div></div></div>`;
-    h += rcard('四面向評語', (r.dims||[]).map(d=>`<div class="dim-item"><div class="dim-name">${d.name}</div><div class="dim-comment">${d.comment}</div></div>`).join(''));
-    h += rcard('整體評語', `<p class="overall-p">${r.overall}</p>`);
-    h += rcard('改善建議', suggList(r.suggestions));
-    h += rcard('改寫範例', `<div class="rewrite-box">${r.rewrite}</div>`);
-  }
-  el.innerHTML = h;
+  el.innerHTML = buildResultHTML(type, r);
   el.style.display = 'block';
-  el.scrollIntoView({ behavior:'smooth', block:'start' });
+  el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ── Practice topics ──
+const practiceTypeCfg = {
+  senior: [
+    { id:'gsat-eng', label:'學測英文作文' },
+    { id:'gsat-chi-zx', label:'國寫知性題' },
+    { id:'gsat-chi-qy', label:'國寫情意題' },
+    { id:'gsat-trans', label:'中譯英' }
+  ],
+  junior: [
+    { id:'bcap-chi', label:'會考國文作文' }
+  ]
+};
+
+const practicePrompts = {
+  'gsat-eng': `你是台灣學測英文作文出題專家。根據2014-2024年歷屆學測英文作文題目趨勢（常見主題：科技與人際、環境議題、個人成長、社會現象），生成3道可能在近年出現的練習題目。只輸出純JSON：{"topics":[{"title":"題目","type":"看圖作文/引導式作文","hint":"寫作提示與方向","trend":"為何這題可能出現"},{"title":"題目","type":"...","hint":"...","trend":"..."},{"title":"題目","type":"...","hint":"...","trend":"..."}]}`,
+  'gsat-chi-zx': `你是台灣學測國語文國寫知性題出題專家。根據2014-2024年歷屆知性題趨勢（常見類型：閱讀圖表分析、社會現象論述、文化議題探討），生成3道可能出現的練習知性題。只輸出純JSON：{"topics":[{"title":"題目","type":"圖表分析/論述/說明","hint":"寫作方向與重點","trend":"出題趨勢分析"},{"title":"...","type":"...","hint":"...","trend":"..."},{"title":"...","type":"...","hint":"...","trend":"..."}]}`,
+  'gsat-chi-qy': `你是台灣學測國語文國寫情意題出題專家。根據2014-2024年歷屆情意題趨勢（常見主題：人與自然、記憶與成長、情感與連結、時代變遷），生成3道可能出現的練習情意題。只輸出純JSON：{"topics":[{"title":"題目","type":"抒情/敘事/議論","hint":"情感方向與寫作建議","trend":"出題趨勢分析"},{"title":"...","type":"...","hint":"...","trend":"..."},{"title":"...","type":"...","hint":"...","trend":"..."}]}`,
+  'gsat-trans': `你是台灣學測中譯英出題專家。根據2014-2024年歷屆中譯英題目趨勢（常考句型：分詞構句、關係子句、使役動詞，常見主題：台灣文化、自然環境、社會現象），生成3組練習中譯英題目（每組兩句）。只輸出純JSON：{"topics":[{"title":"主題名稱","type":"中譯英","s1":"第一句中文","s2":"第二句中文","hint":"句型重點提示","trend":"出題趨勢"},{"title":"...","type":"...","s1":"...","s2":"...","hint":"...","trend":"..."},{"title":"...","type":"...","s1":"...","s2":"...","hint":"...","trend":"..."}]}`,
+  'bcap-chi': `你是台灣國中教育會考國文作文出題專家。根據2014-2024年歷屆會考作文題目趨勢（常見主題：生活經驗、人際關係、夢想與挑戰、環境與自然），生成3道可能出現的練習題目。只輸出純JSON：{"topics":[{"title":"題目","type":"記敘文/議論文/抒情文","hint":"寫作提示與方向","trend":"為何這題可能出現"},{"title":"...","type":"...","hint":"...","trend":"..."},{"title":"...","type":"...","hint":"...","trend":"..."}]}`
+};
+
+function goToPractice() {
+  const tabs = document.getElementById('practice-type-tabs');
+  const types = user.identity === 'junior' ? practiceTypeCfg.junior : practiceTypeCfg.senior;
+  tabs.innerHTML = '';
+  practiceType = types[0].id;
+  types.forEach(t => {
+    tabs.innerHTML += `<button class="tab-btn${t.id===practiceType?' active':''}" onclick="setPracticeType('${t.id}',this)" style="flex:none;padding:6px 16px;border:1px solid var(--border);border-radius:20px">${t.label}</button>`;
+  });
+  document.getElementById('practice-result').innerHTML = '';
+  document.getElementById('practice-err').style.display = 'none';
+  goTo('practice');
+}
+
+function setPracticeType(type, btn) {
+  practiceType = type;
+  document.querySelectorAll('#practice-type-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('practice-result').innerHTML = '';
+}
+
+async function genTopics() {
+  const loading = document.getElementById('practice-loading');
+  const result = document.getElementById('practice-result');
+  const errDiv = document.getElementById('practice-err');
+  errDiv.style.display='none'; result.innerHTML='';
+  loading.style.display='block';
+  try {
+    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':`Bearer ${user.apikey}`},
+      body:JSON.stringify({ model:'llama-3.3-70b-versatile', temperature:0.8, max_tokens:1024, response_format:{type:'json_object'}, messages:[{role:'system',content:practicePrompts[practiceType]},{role:'user',content:'請生成3道練習題目'}] })
+    });
+    const data = await res.json();
+    if(data.error){errDiv.textContent='生成錯誤：'+data.error.message;errDiv.style.display='block';return;}
+    const parsed = JSON.parse(data.choices?.[0]?.message?.content||'{}');
+    const topics = parsed.topics || [];
+    result.innerHTML = topics.map((t,i) => {
+      const body = practiceType === 'gsat-trans'
+        ? `<div style="font-size:13px;color:var(--text-2);margin-bottom:4px">① ${t.s1}</div><div style="font-size:13px;color:var(--text-2);margin-bottom:8px">② ${t.s2}</div>`
+        : '';
+      return `<div class="topic-card">
+        <div class="topic-label">題目 ${i+1}・${t.type}</div>
+        <div class="topic-text">${t.title}</div>
+        ${body}
+        <div class="topic-hint">💡 ${t.hint}</div>
+        <div style="font-size:12px;color:var(--text-3);margin-top:6px">📊 ${t.trend}</div>
+        <button class="use-topic-btn" onclick="useTopic('${practiceType}','${encodeURIComponent(t.title)}')">用這題練習 →</button>
+      </div>`;
+    }).join('');
+  } catch(e) {
+    errDiv.textContent='生成失敗：'+e.message; errDiv.style.display='block';
+  } finally { loading.style.display='none'; }
+}
+
+function useTopic(type, encodedTitle) {
+  const title = decodeURIComponent(encodedTitle);
+  goToGrade(type);
+  setTimeout(() => {
+    const ti = document.getElementById('title-input');
+    if (ti) ti.value = title;
+  }, 100);
+}
+
+// ── Weakness ──
+function goToWeakness() {
+  const h = getHistory();
+  const content = document.getElementById('weakness-content');
+  const types = user.identity === 'junior'
+    ? ['bcap-chi']
+    : ['gsat-eng','gsat-chi-zx','gsat-chi-qy','gsat-trans'];
+  const typeNames = { 'gsat-eng':'英文作文','gsat-chi-zx':'國寫知性題','gsat-chi-qy':'國寫情意題','gsat-trans':'中譯英','bcap-chi':'會考國文作文' };
+  let html = '';
+  types.forEach(type => {
+    const records = h.filter(item => item.type === type);
+    const count = records.length;
+    const name = typeNames[type];
+    if (count < 3) {
+      html += `<div class="weakness-locked">
+        <span class="weakness-lock-icon">🔒</span>
+        <div style="font-weight:600;margin-bottom:4px">${name}</div>
+        <div>再批改 <strong>${3-count}</strong> 次解鎖弱點分析</div>
+        <div style="margin-top:6px;font-size:12px">（目前 ${count}/3 次）</div>
+      </div>`;
+    } else {
+      html += `<div class="weakness-card">
+        <div class="weakness-title">📊 ${name} 弱點分析</div>
+        <div style="font-size:13px;color:var(--text-2);margin-bottom:10px">已有 ${count} 次批改紀錄</div>
+        <button class="submit-btn" style="margin-top:0" onclick="analyzeWeakness('${type}')">分析我的弱點</button>
+        <div id="weakness-result-${type}"></div>
+      </div>`;
+    }
+  });
+  content.innerHTML = html;
+  goTo('weakness');
+}
+
+async function analyzeWeakness(type) {
+  const h = getHistory().filter(item => item.type === type);
+  const loading = document.getElementById('weakness-loading');
+  const errDiv = document.getElementById('weakness-err');
+  const resultEl = document.getElementById('weakness-result-' + type);
+  errDiv.style.display='none';
+  loading.style.display='block';
+  resultEl.innerHTML = '';
+
+  const summaries = h.slice(0,5).map((item,i) =>
+    `第${i+1}次：${item.label}，分數：${item.scoreText}，弱點：${(item.data.weaknesses||item.data.suggestions||[]).slice(0,2).join('、')}`
+  ).join('\n');
+
+  const prompt = `你是作文批改分析師。根據學生以下的批改紀錄，分析他的主要弱點，並提供具體補強建議和練習方法。只輸出純JSON：{"mainWeaknesses":["主要弱點1","主要弱點2","主要弱點3"],"exercises":[{"title":"練習名稱","method":"具體練習方法","frequency":"建議頻率"},{"title":"...","method":"...","frequency":"..."},{"title":"...","method":"...","frequency":"..."}],"encouragement":"一句鼓勵的話"}`;
+
+  try {
+    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':`Bearer ${user.apikey}`},
+      body:JSON.stringify({ model:'llama-3.3-70b-versatile', temperature:0.4, max_tokens:800, response_format:{type:'json_object'}, messages:[{role:'system',content:prompt},{role:'user',content:`批改紀錄：\n${summaries}`}] })
+    });
+    const data = await res.json();
+    if(data.error){errDiv.textContent='分析錯誤：'+data.error.message;errDiv.style.display='block';return;}
+    const r = JSON.parse(data.choices?.[0]?.message?.content||'{}');
+    resultEl.innerHTML = `
+      <div style="margin-top:12px">
+        ${rcard('主要弱點', (r.mainWeaknesses||[]).map((w,i)=>`<div class="sugg-item"><span class="sugg-n">${i+1}</span><span>${w}</span></div>`).join(''))}
+        ${rcard('補強練習', (r.exercises||[]).map(ex=>`<div class="dim-item"><div class="dim-name">${ex.title} <span style="font-weight:400;color:var(--text-3)">・${ex.frequency}</span></div><div class="dim-comment">${ex.method}</div></div>`).join(''))}
+        <div style="text-align:center;font-size:14px;color:var(--pink);padding:12px;background:var(--pink-bg);border-radius:var(--radius)">💪 ${r.encouragement}</div>
+      </div>`;
+  } catch(e) {
+    errDiv.textContent='分析失敗：'+e.message; errDiv.style.display='block';
+  } finally { loading.style.display='none'; }
 }
 </script>
 </body>
