@@ -487,18 +487,26 @@ function renderHistory() {
       <div class="history-header" onclick="toggleHistory(${i})">
         <div>
           <div class="history-title">${item.label}</div>
-          <div class="history-meta">${item.date}</div>
+          <div class="history-meta">${item.date} · ${item.scoreText}</div>
         </div>
-        <div class="history-score">${item.scoreText}</div>
+        <div class="history-score" id="history-arrow-${i}">›</div>
       </div>
-      <div class="history-body" id="history-body-${i}">
-        ${buildResultHTML(item.type, item.data)}
-      </div>
+      <div class="history-body" id="history-body-${i}"></div>
     </div>`).join('');
 }
 function toggleHistory(i) {
   const body = document.getElementById('history-body-' + i);
-  body.classList.toggle('open');
+  const arrow = document.getElementById('history-arrow-' + i);
+  const isOpen = body.classList.contains('open');
+  if (!isOpen) {
+    const h = getHistory();
+    body.innerHTML = buildResultHTML(h[i].type, h[i].data);
+    body.classList.add('open');
+    arrow.textContent = '˅';
+  } else {
+    body.classList.remove('open');
+    arrow.textContent = '›';
+  }
 }
 
 // ── Grade page ──
